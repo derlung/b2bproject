@@ -1,0 +1,231 @@
+
+*{
+    max-width:960px;
+    margin :0 ;
+    font-family: 'Nanum Gothic Coding', monospace;
+    font-size: 15px;
+}
+
+#wrap{
+    width:960px;
+    height:1000px;
+    margin:0 auto;
+}
+
+header{
+    width:100% ;
+    height:15%;
+    background-color: gray;
+}
+
+.header1{
+    width: 100%;
+    height:20%;
+    padding-top: 5px;
+    background-color: white;
+    font-size: 12px;
+    color: #626262;
+    text-align: right;
+}
+
+
+
+.header2>ul>li{
+    list-style-type: none;
+    float: left;
+    padding-top: 50px;
+    padding-left: 20px;
+    
+}
+
+.header2>ul>li>a{
+
+    text-decoration: none;
+    font-size: 30px;
+    color:white;
+}
+.header2>ul>li>a:hover{
+    color:blue;
+}
+
+
+
+
+section {
+    width:100%;
+    height:100% ;        
+    /* background-color: burlywood; */
+
+}
+
+section>article{
+    float:left;
+    height:100%;
+}
+
+.left{
+    width : 20%;
+    /* background-color : aqua; */
+}
+.left>div{
+
+    height: 100%;
+    border: 1px solid #cacaca;   
+}
+    
+.contents{
+    width: 80%;
+    /* background-color: yellow; */
+}
+
+
+
+#contents_header{
+    font-size:20px;
+    margin:10px 10px;
+    padding-right: 20px;
+
+}
+
+
+
+.formbox{
+    padding: 10px;  
+    margin: 10px;      
+    border: 1px solid #cacaca;  
+    background-color: #eeeeee;
+    height : 80px; 
+}   
+
+.formbox1{
+    float: left;
+    width: 50% ;
+    /* background-color: violet; */
+}
+.formbox2{
+    float: right;
+    width: 50%;
+    /* background-color: tomato; */
+}   
+
+label{
+    margin: 5px;
+}
+
+
+.contentbox{
+    padding: 10px;      
+    margin: 10px;      
+    border: 1px solid #cacaca;  
+    background-color: #eeeeee;
+    height : 80%;  
+}
+
+/* 폼태그안에 글씨와 박스라벨*/
+label{
+    display: block;
+    padding : 2px;
+}
+label span{
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+    padding: 5px;
+}
+
+
+
+input[type=text]{
+    width : 150px;            
+    box-sizing: border-box;
+    border : 1px solid #ababab;
+    background-color: white;
+}
+
+input[type=text]:hover{
+    background-color: gray;    
+}
+
+input[type=text]:focus{
+    font-size:110%;
+}
+
+button {
+    border: 1px solid #ababab;
+    width : 50px;
+    height: 25px;
+    
+}
+
+
+
+/* 사이드메뉴 */
+#sideMenu{
+    display: block;
+    margin-top: 20px;
+    padding-left: 20px;
+    list-style-type: none;
+ 
+}
+#sideMenu>li{
+    padding: 10px;
+}
+
+#sideMenu>li>ol{
+    list-style-type: none;
+    padding-top: 15px;
+    padding-left: 10px;
+}
+
+
+#sideMenu>li>ol>li{
+    padding: 5px;
+
+}
+
+#sideMenu>li>ol>li>a{
+    text-decoration: none;
+    color:black;
+    
+}
+#sideMenu>li>ol>li>a:hover{
+    color: blue;
+}
+
+
+
+
+
+
+
+table{
+    margin: 5px;
+    width: max-content;
+    border: 1px solid #ababab;
+    border-collapse: collapse;
+   
+}
+th,td{
+    border: 1px solid #ababab;
+    padding: 3px;
+    text-align: center;
+    font-size: 12px;
+}
+
+th{
+    background-color:  #cacaca;
+    padding: 5px;
+   
+}
+th:2{
+    
+}
+
+table a{
+    text-decoration: none;
+    color: black;
+    font-size: 13px;
+}
+table a:hover{
+    color: #3b87ce;
+}

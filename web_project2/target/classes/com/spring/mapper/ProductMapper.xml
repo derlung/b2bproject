@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.ProductMapper">
+
+<select id="getList" resultType="com.spring.domain.ProductVO">
+select /*+INDEX_DESC(product_tb pk_product_tb)*/rownum rn,pt_cd,pt_NM,unit,tax_NM,origin_NM,storage_NM,exp_D,category_fk,cate_NM,emp_fk,emp_NM
+from PRODUCT_TB p left join tax_tb t on p.tax_fk =t.tax_cd
+left join origin_tb o on p.origin_fk = o.origin_cd
+left join storage_tb s on p.storage_fk = s.storage_cd
+left join category_tb c on p.category_fk = c.cate_cd
+left join emp_tb e on p.emp_fk = e.emp_cd
+</select>
+
+<select id="getCate" resultType="String">
+	select cate_NM from category_tb where cate_cd>0
+</select>
+
+<update id="update_pt">
+	update product_tb set pt_nm= #{pt_nm} ,
+	category_fk=(select cate_cd from category_tb where cate_nm=#{cate_nm}),
+	unit=#{unit},
+	tax_fk=(select tax_cd from tax_tb where tax_nm=#{tax_nm}),
+	storage_fk=(select storage_cd from storage_tb where storage_nm=#{storage_nm}),
+	origin_fk=(select origin_cd from origin_tb where origin_nm=#{origin_nm}),
+	exp_D=#{exp_D}
+	 where pt_cd=#{pt_cd}
+</update>
+</mapper>

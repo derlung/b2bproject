@@ -1,0 +1,105 @@
+.logo{
+	
+	    background: linear-gradient(to right, #007bb5, #0079b4);
+}
+
+
+.tab_menu{
+	width:100%;
+    justify-content: space-around;
+    display: inline-flex;
+    flex-direction : row;
+    
+}
+
+.tabmenu label {
+    display: inline-flex;
+    font-size: 13px;
+    padding: 5px 5px;
+    text-align: center;
+    font-weight: bold;  
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 3px 3px 0 0;
+    color:#777;
+    border-width:1px 1px 0 0;
+    cursor:pointer;
+
+}
+.tabmenu input:nth-child(1):checked ~ div> label:nth-of-type(1) {
+    background-color:#186dbf;
+    color:white;
+}
+.tabmenu input:nth-child(2):checked ~ div>label:nth-of-type(2) {
+    background-color:#186dbf;
+    color:white;}
+.tabmenu input:nth-child(3):checked ~ div>label:nth-of-type(3) {
+    background-color:#186dbf;
+    color:white;}
+.tabmenu input:nth-child(4):checked ~ div>label:nth-of-type(4) {
+    background-color:#186dbf;
+    color:white;}
+
+.tabmenu  > *{
+ display: none; 
+}
+
+.tabmenu > div.tab_menu{
+	display:block;
+}
+
+.tabmenu input:nth-child(1):checked ~ .tab1_content,.tabmenu input:nth-child(2):checked ~ .tab2_content,.tabmenu input:nth-child(3):checked ~ .tab3_content,.tabmenu input:nth-child(4):checked ~ .tab4_content{
+    display: block;
+}
+
+.tabmenu .tab1_content,
+.tabmenu .tab2_content,
+.tabmenu .tab3_content,
+.tabmenu .tab4_content {
+  
+    padding: 5px;
+    width: 100%;
+    
+    
+}
+.tabmenu label:nth-of-type(1):hover{
+    background-color:#68b6ff;
+    color:white;
+}
+.tabmenu label:nth-of-type(2):hover{
+    background-color:#68b6ff;
+    color:white;
+}
+.tabmenu label:nth-of-type(3):hover{
+    background-color:#68b6ff;
+    color:white;
+}   
+.tabmenu label:nth-of-type(4):hover{
+    background-color:#68b6ff;
+    color:white;
+}
+
+form{
+    display: inline-flexbox;
+    text-align: center;
+}
+input{
+    width: 80%;
+    height: 30px;
+    margin-top: 20px;
+    box-sizing: border-box;
+  border: 1px solid #ababab;
+  background-color: white;
+}
+
+button {
+  border: 1px solid #ababab;
+  width: 80%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 50px;
+  background-color:  #186dbf;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+}

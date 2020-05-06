@@ -1,11 +1,9 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../layout/header3.jsp"></jsp:include>
-  <script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"type="text/javascript">
-  </script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <script>
 function update_edit_close(trObj) {
 	$(".update_edit").hide();
@@ -18,10 +16,29 @@ function changeTrColor(trObj, oldColor, newColor) {
 	trObj.onmouseout = function(){
 		trObj.style.backgroundColor = oldColor;
 	}
-}function check() {
-	var result = confirm("변경사항을 저장하겠습니까?");
-	return result;
 }
+
+function check() {
+	var result = confirm("변경사항을 저장하겠습니까?");
+	if(result){
+		pt_update();
+	}else{
+		return;
+	}
+//	return result;
+}
+
+function check2() {
+	var result = confirm("상품 입력을 저장하겠습니까?");
+	if(result){
+		pt_add();
+	}else{
+		return;
+	}
+//	return result;
+}
+
+
 function clickTrEvent(trObj) {
 	var str="";
 	var tr = $(trObj);
@@ -74,24 +91,9 @@ function add_edit(){
 	$(".add_edit").show();
 	$(".update_edit").hide();
 }
-$(document).ready(function() { 
-	$('#pt_update').on('submit',function(event){
-		event.preventDefault();
-// 		if($('#name').val()=='')
-// 		{
-// 		alert("이름을 입력해주세요");
-// 		}else if($('#address').val()=='')
-// 		{
-// 		alert("주소를 입력해주세요");
-// 		}else if($('#designation').val()=='')
-// 		{
-// 		alert("직업을 입력해주세요");
-// 		}else if($('#age').val()=='')
-// 		{
-// 		alert("나이를 입력해주세요");
-// 		}else
-// 		{
-		$.ajax({
+
+function pt_update(){
+	$.ajax({
 		url:"update_product",
 		method:"POST",
 		data:$('#pt_update').serialize(),
@@ -102,13 +104,29 @@ $(document).ready(function() {
 					alert("변경이 실패하였습니다.");
 				}
 		},
+	error: function(data) { alert("오류"); }
+	});		
+}
+
+function pt_add(){
+	console.log($('#pt_add').serialize());
+		$.ajax({
+			url:"add_product",
+			method:"POST",
+			data:$('#pt_add').serialize(),
+			success:function(data){
+				console.log("서버 "+data);
+					/* if(data===true){
+						alert("성공적으로 변경되었습니다.");	
+					}else{
+						alert("변경이 실패하였습니다.");
+					} */
+			},
 		error: function(data) { alert("오류"); }
 		});
-		});
-		});
-// 	let result='${result}';
-// 	alert(result);
+}	
 </script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet" />
       <section>
         <!--본문영역-->
         <article class="contents">
@@ -185,17 +203,21 @@ $(document).ready(function() {
           </div>
         </article>
       </section>
+      
+      
+      
 <!-- -------------------------------------      업데이트 창 ------------------------------------------------>
       <div class="edit_row update_edit">
       		  <div class="contents_header">
       <a> 상품관리</a>
     </div>
       <div class="button">
-        <button type="submit">저장</button>
-        <button type="reset" onclick="javascript:edit_close()">닫기</button>
+        <button type="button" onclick="return check();">저장</button>
+        <button type="reset" onclick="javascript:edit_close();">닫기</button>
         </div>
-    <form id="pt_update" action="/standartize/update_product" method="post" onsubmit="return check();">
-      <table style="display=block">
+    <form id="pt_update" action="update_product" method="post">
+    <!--   -->
+      <table>
         <tr>
           <td >상 품 명</td>
           <td colspan="3">
@@ -249,15 +271,15 @@ $(document).ready(function() {
       <a> 상품추가</a>
     </div>
       <div class="button">
-        <button type="submit">저장</button>
+        <button type="button" onclick="return check2();">저장</button>
         <button type="reset" onclick="javascript:add_edit_close()">닫기</button>
         </div>
-    <form id="pt_add" action="/standartize/add_product" method="post" onsubmit="return check();">
-      <table style="display=block">
+    <form id="pt_add" action="add_product" method="post">
+      <table>
         <tr>
-          <td >상 품 명</td>
+          <td>상 품 명</td>
           <td colspan="3">
-            <input id="pt_NM_a"type="text" style="width:80%" name="pt_NM" />
+            <input id="pt_NM_a" type="text" style="width:80%" name="pt_NM" />
           </td>
                     <td>카테고리</td>
           <td ><select id="cate_a"class="form-control" name="category_fk" style="width:80%">
@@ -294,8 +316,8 @@ $(document).ready(function() {
           <td>M D</td>
           <td>
             <input type="text" id="emp_a" style="background-color: #e0e0e0;" name="emp_NM" readonly/>
-             <input type="hidden" id="cd_a" name="pt_cd" />
-          </td>
+            <!--  <input type="hidden" id="cd_a" name="pt_cd" /> -->
+          </td> 
         </tr>
       </table>
     </form>
@@ -319,13 +341,13 @@ $(document).ready(function() {
         <tr>
           <td>상 품 명</td>
           <td colspan="3">
-            <input type="text" />
+            <input type="text" name="pt_NM" />
           </td>
         </tr>
         <tr>
           <td>단 위</td>
           <td>
-            <select>
+            <select name="unit">
               <option value="EA">EA</option>
               <option value="KG">KG</option>
               <option value="BOX">BOX</option>
@@ -333,7 +355,7 @@ $(document).ready(function() {
           </td>
           <td>면/과세</td>
           <td>
-            <select name="" id="">
+            <select name="tax_NM" id="">
               <option value="0">면세</option>
               <option value="1">과세</option>
             </select>
@@ -341,10 +363,10 @@ $(document).ready(function() {
         </tr>
         <tr>
           <td>원 산 지</td>
-          <td><input type="text" /></td>
+          <td><input type="text"  name="origin_NM"/></td>
           <td>보관방법</td>
           <td>
-            <select name="" id="">
+            <select name="storage_fk" id="">
               <option value="0">상온</option>
               <option value="1">냉장</option>
               <option value="2">냉동</option>
@@ -353,7 +375,7 @@ $(document).ready(function() {
         </tr>
         <tr>
           <td>유통기한</td>
-          <td><input type="text" /></td>
+          <td><input type="text" name="exp_D" /></td>
           <td>M D</td>
           <td>
             <input type="text" disabled style="background-color: #e0e0e0;" />
@@ -361,7 +383,7 @@ $(document).ready(function() {
         </tr>
         <tr>
           <td>카테고리</td>
-          <td><input type="text" /></td>
+          <td><input type="text" name="cate_NM" /></td>
           <td colspan="2">
           </td>
         </tr>

@@ -4,11 +4,14 @@ import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,8 +37,7 @@ public class StandartizeController {
 			model.addAttribute("cate",service.getCate());
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 	
 	@GetMapping(value="creditor_view")
@@ -51,9 +53,17 @@ public class StandartizeController {
 	}
 	
 	@PostMapping(value="add_product")
-	public String  add_product(ProductVO vo,RedirectAttributes rttr) {
-		System.out.println(vo);
-		return "redirect:product_view";
+	public ResponseEntity<Boolean> add_product(ProductVO vo,Model model) {		
+		log.info("상품 삽입"+vo);	
+		Boolean result=null;
+		try {
+			result=service.insert_pt(vo);
+			log.info("삽입결과 : "+result);
+			model.addAttribute("list",service.getList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Boolean>(result,HttpStatus.OK);		
 	}
 	
 	@PostMapping(value="update_product")
@@ -62,12 +72,10 @@ public class StandartizeController {
 		System.out.println(vo);
 		log.info("상품 변경");
 		boolean result=false;
-		try {
-		
+		try {		
 			result =service.update_pt(vo); 
 		} catch (Exception e) {
-			e.printStackTrace();
-			
+			e.printStackTrace();			
 		}
 		return result;
 	}

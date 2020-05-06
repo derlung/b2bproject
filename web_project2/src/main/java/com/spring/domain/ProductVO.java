@@ -4,19 +4,19 @@ import lombok.Data;
 
 @Data
 public class ProductVO {
-	private int rn;
-	private int pt_cd;
-	private String pt_NM;
-	private String unit;
-	private String tax_NM;
-	private int tax_cd;
-	private String origin_NM;
-	private String storage_NM;
-	private int storage_fk;
-	private int exp_D;
-	private int category_fk;
-	private String cate_NM;
-	private int emp_fk;
-	private String emp_NM;
+	private int rn;    //no
+	private int pt_cd;  //상품코드
+	private String pt_NM; //상품명
+	private String unit;  //단위
+	private String tax_NM; //면과세 명
+	private int tax_cd;    //면과세 코드
+	private String origin_NM;  //원산지
+	private String storage_NM; //보관 명
+	private int storage_cd;    // 보관방법
+	private int exp_D; 		   // 유통기한
+	private int category_fk;   // 카테고리 코드
+	private String cate_NM;    //카테고리 명 
+	private int emp_fk;		// 결재자
+	private String emp_NM;	// 결재자 이름
 
 }

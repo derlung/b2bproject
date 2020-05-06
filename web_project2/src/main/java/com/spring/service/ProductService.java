@@ -9,4 +9,6 @@ public interface ProductService {
 	public List<ProductVO> getList() throws Exception;
 	public List<CateVO> getCate() throws Exception;
 	public boolean update_pt(ProductVO vo)throws Exception;
+	public boolean insert_pt(ProductVO vo)throws Exception;
+	 
 }

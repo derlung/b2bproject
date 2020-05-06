@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.ProductVO;
@@ -53,5 +54,21 @@ public class StandartizeController {
 	public String  add_product(ProductVO vo,RedirectAttributes rttr) {
 		System.out.println(vo);
 		return "redirect:product_view";
+	}
+	
+	@PostMapping(value="update_product")
+	@ResponseBody
+	public boolean  update_product(ProductVO vo,RedirectAttributes rttr) {
+		System.out.println(vo);
+		log.info("상품 변경");
+		boolean result=false;
+		try {
+		
+			result =service.update_pt(vo); 
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return result;
 	}
 }

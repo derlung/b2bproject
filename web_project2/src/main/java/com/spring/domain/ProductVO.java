@@ -9,8 +9,10 @@ public class ProductVO {
 	private String pt_NM;
 	private String unit;
 	private String tax_NM;
+	private int tax_cd;
 	private String origin_NM;
 	private String storage_NM;
+	private int storage_fk;
 	private int exp_D;
 	private int category_fk;
 	private String cate_NM;

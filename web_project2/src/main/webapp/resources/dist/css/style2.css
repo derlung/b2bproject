@@ -1,5 +1,8 @@
 /* 아이콘 클래스*/
 /* Rules for sizing the icon. */
+.material-icons{
+	vertical-align: middle;
+}
 .material-icons.md-18 {
   font-size: 18px;
 }
@@ -119,6 +122,7 @@ padding:10px 35px;
   } */
 
 .contents_header {
+	float:left;
   display: inline-flex;
   /* height: auto; */
   font-size: 18px;
@@ -243,14 +247,17 @@ table a:hover {
         bottom: 0;
         left: 0;
         z-index:500;  /* Added */
-        background:white;
         padding:10px;
         border: 1px solid #cacaca;
         display:none;
         margin:0 30px;
+        margin-bottom:20px;
+       padding-bottom:20px;
+       background:#E6E6FA;
 	   
 }
 .edit_row table{
 	pading:5px 15px;
 	margin: 0 auto;
+	   background:white;
 }

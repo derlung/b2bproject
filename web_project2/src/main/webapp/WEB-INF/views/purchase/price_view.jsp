@@ -39,7 +39,6 @@
 		// }
 		// });
 		// });
-
 		$("#pt_modal").modal("show");
 	}
 	function creditor_modal() {
@@ -72,12 +71,18 @@
 					</button>
 				</div>
 				<div class="formbox">
-					<label for=""> <a id="point-star">*</a> <span>상품명/코드</span>
-						<input type="text" />
-					</label> <label for=""> <span>구매처명/코드</span> <input type="text" />
-					</label> <label for=""> <span>위치</span> <input type="text" />
-					</label>
-
+					<div >
+						<label for=""> <a id="point-star">*</a> <span>상품명/코드</span>
+							<input />
+						</label> <label for=""> <span>대분류</span> <input />
+						</label> <label for=""> <span>카테고리</span> <input />
+						</label>
+					</div>
+					<div >
+					<label for=""> <span>구매처명/코드</span> <input />
+						</label> <label for=""> <span>위치</span> <input />
+						</label> 						</label>
+					</div>
 				</div>
 			</form>
 		</div>

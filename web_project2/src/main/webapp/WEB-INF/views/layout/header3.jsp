@@ -29,7 +29,7 @@
 <!--ICON-->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet" />
-<link rel="stylesheet" href="/resources/dist/css/style2.css?1" />
+<link rel="stylesheet" href="/resources/dist/css/style2.css" />
 </head>
 <body>
 	<div id="wrap">

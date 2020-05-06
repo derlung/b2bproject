@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.domain.CateVO;
 import com.spring.domain.ProductVO;
 import com.spring.mapper.ProductMapper;
 
@@ -20,13 +21,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<String> getCate() throws Exception {
+	public List<CateVO> getCate() throws Exception {
 		return mapper.getCate();
 	}
 
 	@Override
-	public int update_pt(ProductVO vo) throws Exception {
-		return mapper.update_pt(vo);
+	public boolean update_pt(ProductVO vo) throws Exception {
+		return mapper.update_pt(vo)>0?true:false;
 	}
 
 }

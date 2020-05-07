@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.PurchaseMapper">
+
+	<!-- 상품 검색-->
+	<select id="search_pt" resultType="com.spring.domain.ProductVO">
+		select * 
+		from product_tb
+		where
+		<if test="criteria=='pt_nm'">
+			pt_nm Like '%'||#{keyword}||'%'
+		</if>
+		<if test="criteria=='pt_cd'">
+			pt_cd Like '%'||#{keyword}||'%'
+		</if>
+	</select>
+</mapper>

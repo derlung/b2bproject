@@ -10,7 +10,8 @@ public class ProductVO {
 	private String unit;  //단위
 	private String tax_NM; //면과세 명
 	private int tax_cd;    //면과세 코드
-	private String origin_NM;  //원산지
+	private String origin_CD;  //원산지 코드
+	private String origin_NM;  //원산지 명
 	private String storage_NM; //보관 명
 	private int storage_cd;    // 보관방법
 	private int exp_D; 		   // 유통기한

@@ -8,7 +8,6 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"
 	type="text/javascript">
-	
 </script>
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css"
@@ -314,7 +313,12 @@
 			</tr>
 			<tr>
 				<td>원 산 지</td>
-				<td><input type="text" id="origin_a" name="origin_NM" /></td>
+							<td><select id="origin_a" class="form-control"
+								name="origin_CD" style="width: 80%">
+									<c:forEach var="c" items="${origin}" varStatus="i">
+										<option value="${c.origin_cd}">${c.origin_nm}</option>
+									</c:forEach>
+							</select></td>
 				<td>유통기한</td>
 				<td><input id="exp_D_a" type="text" name="exp_D" /></td>
 				<td>M D</td>
@@ -324,78 +328,6 @@
 			</tr>
 		</table>
 	</form>
-</div>
-<!--       Modal -->
-<div class="modal fade" id="check" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div class="contents_header">
-					<span class="material-icons"> assignment </span> <a> 신규상품등록</a>
-				</div>
-				<form action="">
-					<table>
-						<tr>
-							<td>상 품 명</td>
-							<td colspan="3"><input type="text" name="pt_NM" /></td>
-						</tr>
-						<tr>
-							<td>단 위</td>
-							<td><select name="unit">
-									<option value="EA">EA</option>
-									<option value="KG">KG</option>
-									<option value="BOX">BOX</option>
-							</select></td>
-							<td>면/과세</td>
-							<td><select name="tax_NM" id="">
-									<option value="0">면세</option>
-									<option value="1">과세</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td>원 산 지</td>
-							<td><select id="origin_a" class="form-control"
-								name="origin_nm_a" style="width: 80%">
-									<c:forEach var="c" items="${origin}" varStatus="i">
-										<option value="${c.origin_cd}">${c.origin_nm}</option>
-									</c:forEach>
-							</select></td>
-							<td>보관방법</td>
-							<td><select name="storage_fk" id="">
-									<option value="0">상온</option>
-									<option value="1">냉장</option>
-									<option value="2">냉동</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td>유통기한</td>
-							<td><input type="text" name="exp_D" /></td>
-							<td>M D</td>
-							<td><input type="text" disabled
-								style="background-color: #e0e0e0;" /></td>
-						</tr>
-						<tr>
-							<td>카테고리</td>
-							<td><input type="text" name="cate_NM" /></td>
-							<td colspan="2"></td>
-						</tr>
-					</table>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">저장</button>
-				<button type="reset" class="btn btn-default">다시입력</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-			</div>
-		</div>
-	</div>
 </div>
 <script>
 	$("#cate").select2();

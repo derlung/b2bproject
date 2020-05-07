@@ -27,7 +27,26 @@ left join emp_tb e on p.emp_fk = e.emp_cd
 </update>
 <insert id="insert_pt">	
 	insert into product_tb(pt_cd,pt_nm,unit,tax_fk,origin_fk,storage_fk,exp_d,category_fk)
-	values(PT_CD.NEXTVAL,#{pt_NM},#{unit},#{tax_cd},#{origin_NM},#{storage_cd},#{exp_D},#{category_fk})
+	values(
+	<choose>
+		<when test='category_fk gte 100 and category_fk lt 200'>
+		PT_CD1.NEXTVAL   
+		</when>
+		<when test='category_fk gte 200 and category_fk lt 300'>
+		PT_CD2.NEXTVAL   
+		</when>
+		<when test='category_fk gte 300 and category_fk lt 400'>
+		PT_CD3.NEXTVAL   
+		</when>
+		<when test='category_fk gte 400 and category_fk lt 500'>
+		PT_CD4.NEXTVAL   
+		</when>
+		<when test='category_fk gte 500 and category_fk lt 600'>
+		PT_CD5.NEXTVAL   
+		</when>
+	</choose>	
+	
+	,#{pt_NM},#{unit},#{tax_cd},#{origin_CD},#{storage_cd},#{exp_D},#{category_fk})
 </insert>
 <select id="getOrigin" resultType="com.spring.domain.OriginVO">
 	select origin_cd,origin_NM from origin_tb

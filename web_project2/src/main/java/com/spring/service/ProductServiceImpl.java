@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.domain.CateVO;
+import com.spring.domain.OriginVO;
 import com.spring.domain.PriceVO;
 import com.spring.domain.ProductVO;
 import com.spring.mapper.ProductMapper;
@@ -36,6 +37,11 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.insert_pt(vo)>0?true:false;
 	}
 
-	
+
+	@Override
+	public List<OriginVO> getOrigin() throws Exception {
+		return mapper.getOrigin();
+	}
+
 	
 }

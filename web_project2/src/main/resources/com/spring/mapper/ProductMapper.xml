@@ -29,4 +29,7 @@ left join emp_tb e on p.emp_fk = e.emp_cd
 	insert into product_tb(pt_cd,pt_nm,unit,tax_fk,origin_fk,storage_fk,exp_d,category_fk)
 	values(PT_CD.NEXTVAL,#{pt_NM},#{unit},#{tax_cd},#{origin_NM},#{storage_cd},#{exp_D},#{category_fk})
 </insert>
+<select id="getOrigin" resultType="com.spring.domain.OriginVO">
+	select origin_cd,origin_NM from origin_tb
+</select>
 </mapper>

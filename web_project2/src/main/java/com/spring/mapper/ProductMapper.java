@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.spring.domain.CateVO;
 import com.spring.domain.OriginVO;
-import com.spring.domain.PriceVO;
 import com.spring.domain.ProductVO;
 
 public interface ProductMapper {

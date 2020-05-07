@@ -1,5 +1,6 @@
 package com.spring.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.spring.domain.ProductVO;
 import com.spring.domain.SearchVO;
 import com.spring.service.PriceService;
 import com.spring.service.ProductService;
+import com.spring.service.PurchaseService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +31,9 @@ public class PurchaseController {
 	
 	@Autowired
 	ProductService service;
+	
+	@Autowired
+	PurchaseService service3;
 	
 	
 	@GetMapping(value="purchase_view")
@@ -62,15 +67,15 @@ public class PurchaseController {
 	//단가등록 메소드
 	@PostMapping(value="pt_search")
 	@ResponseBody
-	public boolean  pt_search(SearchVO vo,RedirectAttributes rttr) {
-		System.out.println(vo);
-		boolean result=false;
+	public List<ProductVO>  pt_search(SearchVO vo,RedirectAttributes rttr) {
+		log.info(vo.toString());
+		List<ProductVO> list = null;
 		try {		
-			
+			 list = service3.search_pt(vo);
 		} catch (Exception e) {
 			e.printStackTrace();			
 		}
-		return result;
+		return list;
 	}
 	
 }

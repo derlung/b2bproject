@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>    
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="com.spring.domain.CustomerVO"%>
 <jsp:include page="../layout/header3.jsp"></jsp:include>
 <section>
                <article class="contents">

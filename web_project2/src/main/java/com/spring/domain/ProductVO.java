@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ProductVO {
+	
 	private int rn;    //no
 	private int pt_cd;  //상품코드
 	private String pt_NM; //상품명

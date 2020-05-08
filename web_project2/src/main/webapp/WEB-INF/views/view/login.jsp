@@ -39,9 +39,9 @@
                 <div class="p-1">    
                 <div  class="menu">
    			 <div class="tabmenu">
-        <input type="radio" name="tab" id="tab1">
+        <input type="radio" name="tab" id="tab1" >
         <input type="radio" name="tab" id="tab2">
-        <input type="radio" name="tab" id="tab3">
+        <input type="radio" name="tab" id="tab3"   checked="checked">
         <input type="radio" name="tab" id="tab4">
         <div class="tab_menu">
 	        <label for="tab1">협력사</label>

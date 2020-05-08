@@ -18,4 +18,17 @@ left join emp_tb e on p.emp_fk = e.emp_cd
 			pt_cd Like '%'||#{keyword}||'%'
 		</if>
 	</select>
+	
+	<!--  검색-->
+	<select id="search_creditor" resultType="com.spring.domain.CreditorVO">
+		select creditor_cd , creditor_NM,pre_NM,Address
+		from creditor_tb
+		where
+		<if test="criteria=='creditor_NM'">
+			Creditor_nm Like '%'||#{keyword}||'%'
+		</if>
+		<if test="criteria=='creditor_cd'">
+			Creditor_cd Like '%'||#{keyword}||'%'
+		</if>
+	</select>
 </mapper>

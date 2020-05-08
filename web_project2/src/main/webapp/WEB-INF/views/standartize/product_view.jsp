@@ -221,7 +221,7 @@
 	</div>
 	<div class="button">
 		<button type="button" onclick="return check();">저장</button>
-		<button type="reset" onclick="javascript:edit_close();">닫기</button>
+		<button type="reset" onclick="javascript:update_edit_close();">닫기</button>
 	</div>
 	<form id="pt_update" action="update_product" method="post">
 		<!--   -->

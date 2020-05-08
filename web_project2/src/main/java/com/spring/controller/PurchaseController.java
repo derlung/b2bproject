@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.domain.CreditorVO;
 import com.spring.domain.ProductVO;
 import com.spring.domain.SearchVO;
 import com.spring.service.PriceService;
@@ -68,10 +69,10 @@ public class PurchaseController {
 		
 	}
 	
-	//단가등록 메소드
+	//상품검색 메소드
 	@PostMapping(value="pt_search")
 	@ResponseBody
-	public List<ProductVO>  pt_search(SearchVO vo,RedirectAttributes rttr) {
+	public List<ProductVO>  pt_search(SearchVO vo) {
 		log.info(vo.toString());
 		List<ProductVO> list = null;
 		try {		
@@ -81,5 +82,17 @@ public class PurchaseController {
 		}
 		return list;
 	}
-	
+	//구매처검색 메소드
+	@PostMapping(value="creditor_search")
+	@ResponseBody
+	public List<CreditorVO>  creditor_search(SearchVO vo) {
+		log.info(vo.toString());
+		List<CreditorVO> list = null;
+		try {		
+			 list = service3.search_creditor(vo);
+		} catch (Exception e) {
+			e.printStackTrace();			
+		}
+		return list;
+	}
 }

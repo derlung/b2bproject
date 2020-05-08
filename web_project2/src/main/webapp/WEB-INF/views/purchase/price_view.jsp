@@ -12,8 +12,12 @@ $('#pt_modal').on('hide.bs.modal', function (e) {
      $('#pt_key').val('');
      $('#pt_criteria').val('pt_cd');
 	})
-	
-}) 
+$('#creditor_modal').on('hide.bs.modal', function (e) {
+	 $('#creditor_result').html("");
+     $('#creditor_key').val('');
+     $('#creditor_criteria').val('creditor_cd');
+	})
+}) ;
    function changeTrColor(trObj, oldColor, newColor) {
       //행 마우스 올리면 색변환
       trObj.style.backgroundColor = newColor;
@@ -32,14 +36,7 @@ $('#pt_modal').on('hide.bs.modal', function (e) {
    function pt_modal_close() {
 	      $("#pt_modal").modal("hide");
 	   }
-   function edit_close(trObj) {
-	      // 변경 창 닫기
-	      $(".edit_row").hide();
-	   }
-   function edit_close(trObj) {
-	      // 변경 창 닫기
-	      $(".edit_row").hide();
-	   }
+
    function pt_modal() {
       $("#pt_modal").modal("show");
    }
@@ -100,7 +97,50 @@ function pt_search_click(obj){
     $("#pt_modal").modal("hide");
 	
 	}
+function creditor_search_click(obj){
+
+	var cd=$(obj).children().eq(0).text();
+	var nm=$(obj).children().eq(1).text();
+	document.getElementById("creditor_cd").value = cd;
+	document.getElementById("creditor_NM").value = nm;
+    $("#creditor_modal").modal("hide");
 	
+	}
+function creditor_search(){
+	   if($('#creditor_key').val()=='') {
+	            alert("검색값을 입력해주세요");}
+		
+	   //값 가져오기
+		var criteria =document.getElementById("creditor_criteria").value;
+		var keyword=	document.getElementById("creditor_key").value;
+		console.log(criteria);
+		console.log(keyword);
+	      $.ajax({
+	      //select.php 로 가서
+	      url:"creditor_search",
+	      method:"POST",
+	      //위에서 클릭한 employee_id 데이터를 url로 넘겨주고
+	      data:{'criteria':criteria,
+				'keyword':keyword},
+	      success:function(data){
+	      //성공하면 select.php에서 뿌린 데이터를 data 변수에 담아 모달-바디에 붙여라
+	      var table ="";
+	      for (var i = 0; i < data.length; i++) {
+	    	  var creditor_cd = data[i].creditor_cd;
+	    	  var creditor_NM = data[i].creditor_NM;
+	    	  var pre_NM = data[i].pre_NM;
+	    	  var address = data[i].address;
+	      table += "<div style='width:100%;border:1px solid #cacaca;' onclick='javascript:creditor_search_click(this)'>";
+	      table+="<div style='float:left;height:40px;line-height:40px;background:#FFFFFF';padding:5px; class='cd'' >"+creditor_cd+" </div>"+
+	      			"<div style='height:20px;line-height:20px;background:#F4FFFD' >"+creditor_NM+"</div>"+
+	      			"<div style='height:20px;line-height:20px;display:inline-flex;justify-content:space-around;'><div>"+pre_NM+"</div><div>"+address+"</div></div>";
+	      table+="</div>";
+	      
+	      }
+	      $('#creditor_result').html(table);
+		}
+	      });
+	      }
 </script>
 <section>
 	<article class="contents">
@@ -203,7 +243,7 @@ function pt_search_click(obj){
 		<div class="button">
 			<button type="submit">등록</button>
 			<button type="reset">다시입력</button>
-			<button type="reset" onclick="javascript:edit_close()">닫기</button>
+			<button type="button" onclick="javascript:edit_close()">닫기</button>
 		</div>
 		<table style="">
 			<tr>
@@ -247,8 +287,8 @@ function pt_search_click(obj){
 	</form>
 </div>
 
-<!--------------       Modal ----------------------------->
-<!-- 상품 모달 -->
+<!---------------------------------------------------------       Modal -------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------      상품 모달 ------------------------------------------------------------------------------------------------------>
 <div class="modal fade" id="pt_modal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
@@ -286,7 +326,9 @@ function pt_search_click(obj){
 	</div>
 </div>
 
-<!-- 구매처 모달 -->
+<!-------------------------------------------------------------------------------- 구매처 모달 ---------------------------------------------------------------->
+<!-------------------------------------------------------------------------------- 구매처 모달 ---------------------------------------------------------------->
+
 <div class="modal fade" id="creditor_modal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
@@ -302,60 +344,21 @@ function pt_search_click(obj){
 			</div>
 			<div class="modal-body">
 				<div style="background-color: #cacaca; padding: 5px 15px">
-					<select style="height: 26px;">
+					<select style="height: 26px;" id="creditor_criteria">
 						<option value="creditor_cd">구매처코드</option>
-						<option value="creditor_nm">구매처명</option>
-					</select> <input id="search_value" name="search_value"
+						<option value="creditor_NM">구매처명</option>
+					</select> <input id="creditor_key" name="creditor_key"
 						style="height: 26px; width: 70%" /> <span class="material-icons"
-						onclick="javascript:pt_search()" style="vertical-align: middle">
+						onclick="javascript:creditor_search()" style="vertical-align: middle">
 						search</span>
 				</div>
 				<form action="">
-					<div class="contentbox" style="overflow: scroll;">
+					<div class="contentbox" style="overflow: scroll;" id="creditor_result">
 						<!--                검색 결과 넣는 곳 -->
 
 					</div>
 				</form>
 			</div>
-
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">저장</button>
-				<button type="reset" class="btn btn-default">다시입력</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- 위치 모달 -->
-<div class="modal fade" id="center_modal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<div style="font-size: 18px; color: #186dbf; font-weight: bold;">
-					<a>위 치 검 색</a>
-				</div>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div style="background-color: #cacaca; padding: 5px 15px">
-					<select style="height: 26px;">
-						<option value="center_cd">센터코드</option>
-						<option value="center_nm">센터명</option>
-					</select> 
-					<input id="search_value" name="search_value"	style="height: 26px; width: 70%" /> 
-					<span class="material-icons"	onclick="javascript:pt_search()" style="vertical-align: middle">
-						search</span>
-				</div>
-			</div>
-			<form action="">
-				<div id="" class="contentbox" style="overflow: scroll;">
-					<!--                검색 결과 넣는 곳 -->
-				</div>
-			</form>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">저장</button>
 				<button type="reset" class="btn btn-default">다시입력</button>

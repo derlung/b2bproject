@@ -19,6 +19,50 @@
 function customer_modal() {
 	$("#customer_modal").modal("show");
 }
+function customer_modal_close() {
+    $("#customer_modal").modal("hide");
+ }
+function pt_search(){
+	   if($('#pt_key').val()=='') {
+	            alert("검색값을 입력해주세요");}
+		
+	   //값 가져오기
+		var criteria =document.getElementById("pt_criteria").value;
+		var keyword=	document.getElementById("pt_key").value;
+
+	      $.ajax({
+	      //select.php 로 가서
+	      url:"pt_search",
+	      method:"POST",
+	      //위에서 클릭한 employee_id 데이터를 url로 넘겨주고
+	      data:{'criteria':criteria,
+				'keyword':keyword},
+	      success:function(data){
+	      //성공하면 select.php에서 뿌린 데이터를 data 변수에 담아 모달-바디에 붙여라
+	      var table ="";
+	      for (var i = 0; i < data.length; i++) {
+	    	  var pt_cd = data[i].pt_cd;
+	    	  var pt_NM = data[i].;
+	    	  var cate_NM = data[i].center;	     
+	    	  table += "<div style='width:100%;border:1px solid #cacaca;' onclick='javascript:pt_search_click(this)'>";
+	      table+="<div style='float:left;height:40px;line-height:40px;background:#FFFFFF';padding:5px; class='cd'' >"+pt_cd+" </div>"+
+	      			"<div style='height:20px;line-height:20px;background:#F4FFFD' >"+pt_NM+"</div>"+
+	      			"<div style='height:20px;line-height:20px;display:inline-flex;justify-content:space-around;'><div>"+cate_NM+"</div><div>"+origin_NM+"</div></div>";
+	      table+="</div>";
+		}
+	      $('#pt_result').html(table);
+	      }
+	      });
+	      };
+function customer_search_click(obj){
+
+	var cd=$(obj).children().eq(0).text();
+	var nm=$(obj).children().eq(1).text();
+	document.getElementById("customer_cd").value = cd;
+	document.getElementById("customer_NM").value = nm;
+    $("#customer_modal").modal("hide");
+	
+	}
 </script>
 <script>
 	$(function() {
@@ -200,7 +244,6 @@ function customer_modal() {
                   </table>
                 </div>
               </div>
-  
               </div>
         </article>
         <table
@@ -235,25 +278,23 @@ function customer_modal() {
 			</div>
 			<div class="modal-body">
 				<div style="background-color: #cacaca; padding: 5px 15px">
-					<select style="height: 26px;">
-						<option value="creditor_cd">고객사코드</option>
-						<option value="creditor_nm">고객사명</option>
-					</select> <input id="search_value" name="search_value"
+					<select style="height: 26px;" id="customer_critieria" name="customer_criteria">
+						<option value="customer_cd">고객사코드</option>
+						<option value="customer_nm">고객사명</option>
+					</select> <input id="customer_key" name="customer_key"
 						style="height: 26px; width: 70%" /> <span class="material-icons"
 						onclick="javascript:pt_search()" style="vertical-align: middle">
 						search</span>
 						<input id="center" name="center" type="hidden">
 				</div>
 				<form action="">
-					<div class="contentbox" style="overflow: scroll;">
+					<div id="customer_result"class="contentbox" style="overflow: scroll;height:500px;">
 						<!-- 					검색 결과 넣는 곳 							-->
+						
 					</div>
 				</form>
 			</div>
-
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">저장</button>
-				<button type="reset" class="btn btn-default">다시입력</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			</div>
 		</div>

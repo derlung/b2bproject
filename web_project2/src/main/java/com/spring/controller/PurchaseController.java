@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.domain.CateVO;
 import com.spring.domain.CreditorVO;
 import com.spring.domain.ProductVO;
 import com.spring.domain.SearchVO;
@@ -90,6 +91,19 @@ public class PurchaseController {
 		List<CreditorVO> list = null;
 		try {		
 			 list = service3.search_creditor(vo);
+		} catch (Exception e) {
+			e.printStackTrace();			
+		}
+		return list;
+	}
+	//위치검색 메소드
+	@PostMapping(value="center_search")
+	@ResponseBody
+	public List<CateVO>  center_search(SearchVO vo) {
+		log.info(vo.toString());
+		List<CateVO> list = null;
+		try {		
+			 list = service3.search_center(vo);
 		} catch (Exception e) {
 			e.printStackTrace();			
 		}

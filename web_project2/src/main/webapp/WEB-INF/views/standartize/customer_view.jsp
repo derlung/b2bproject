@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>    
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="com.spring.domain.CustomerVO"%>
-<%@page import="com.spring.domain.CreditorVO"%>
-<jsp:include page="../layout/header3.jsp"></jsp:include>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><jsp:include page="../layout/header3.jsp"></jsp:include>
 <section>
                <article class="contents">
           <div class="form_header">

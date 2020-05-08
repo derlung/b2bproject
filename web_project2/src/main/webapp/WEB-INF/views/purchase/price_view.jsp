@@ -17,6 +17,11 @@ $('#creditor_modal').on('hide.bs.modal', function (e) {
      $('#creditor_key').val('');
      $('#creditor_criteria').val('creditor_cd');
 	})
+$('#center_modal').on('hide.bs.modal', function (e) {
+	 $('#center_result').html("");
+     $('#center_key').val('');
+     $('#center_criteria').val('center_cd');
+	})
 }) ;
    function changeTrColor(trObj, oldColor, newColor) {
       //행 마우스 올리면 색변환
@@ -36,7 +41,12 @@ $('#creditor_modal').on('hide.bs.modal', function (e) {
    function pt_modal_close() {
 	      $("#pt_modal").modal("hide");
 	   }
-
+   function creditor_modal_close() {
+	      $("#creditor_modal").modal("hide");
+	   }
+   function center_modal_close() {
+	      $("#center_modal").modal("hide");
+	   }
    function pt_modal() {
       $("#pt_modal").modal("show");
    }
@@ -77,12 +87,13 @@ $('#creditor_modal').on('hide.bs.modal', function (e) {
 	    	  var tax_NM = data[i].tax_NM;
 	    	  var storage_NM = data[i].storage_NM;
 	    	  var exp_D = data[i].exp_D;
+	    	  var purchase_rate = data[i].purchase_rate;
 	     
 	    	  table += "<div style='width:100%;border:1px solid #cacaca;' onclick='javascript:pt_search_click(this)'>";
 	      table+="<div style='float:left;height:40px;line-height:40px;background:#FFFFFF';padding:5px; class='cd'' >"+pt_cd+" </div>"+
 	      			"<div style='height:20px;line-height:20px;background:#F4FFFD' >"+pt_NM+"</div>"+
 	      			"<div style='height:20px;line-height:20px;display:inline-flex;justify-content:space-around;'><div>"+cate_NM+"</div><div>"+origin_NM+"</div></div>";
-	      table+="</div>";
+	      table+="<input type='hidden' value="+purchase_rate+"></div>";
 		}
 	      $('#pt_result').html(table);
 	      }
@@ -92,19 +103,25 @@ function pt_search_click(obj){
 
 	var cd=$(obj).children().eq(0).text();
 	var nm=$(obj).children().eq(1).text();
+	var pu=$(obj).children().eq(3).val();
 	document.getElementById("pt_cd").value = cd;
 	document.getElementById("pt_NM").value = nm;
+	document.getElementById("purchase_rate").value=pu;
     $("#pt_modal").modal("hide");
 	
 	}
+	
 function creditor_search_click(obj){
-
 	var cd=$(obj).children().eq(0).text();
 	var nm=$(obj).children().eq(1).text();
 	document.getElementById("creditor_cd").value = cd;
 	document.getElementById("creditor_NM").value = nm;
     $("#creditor_modal").modal("hide");
-	
+	}
+function center_search_click(obj){
+	var cd=$(obj).children().eq(0).text();
+	document.getElementById("center_cd").value = cd;
+    $("#center_modal").modal("hide");
 	}
 function creditor_search(){
 	   if($('#creditor_key').val()=='') {
@@ -113,8 +130,6 @@ function creditor_search(){
 	   //값 가져오기
 		var criteria =document.getElementById("creditor_criteria").value;
 		var keyword=	document.getElementById("creditor_key").value;
-		console.log(criteria);
-		console.log(keyword);
 	      $.ajax({
 	      //select.php 로 가서
 	      url:"creditor_search",
@@ -138,6 +153,36 @@ function creditor_search(){
 	      
 	      }
 	      $('#creditor_result').html(table);
+		}
+	      });
+	      }
+	      
+function center_search(){
+	   if($('#center_key').val()=='') {
+	            alert("검색값을 입력해주세요");}
+		
+	   //값 가져오기
+		var criteria =document.getElementById("center_criteria").value;
+		var keyword=	document.getElementById("center_key").value;
+	      $.ajax({
+	      //select.php 로 가서
+	      url:"center_search",
+	      method:"POST",
+	      //위에서 클릭한 employee_id 데이터를 url로 넘겨주고
+	      data:{'criteria':criteria,
+				'keyword':keyword},
+	      success:function(data){
+	      //성공하면 select.php에서 뿌린 데이터를 data 변수에 담아 모달-바디에 붙여라
+	      var table ="";
+	      for (var i = 0; i < data.length; i++) {
+	    	  var center_cd = data[i].cate_cd;
+	    	  var center_NM = data[i].cate_nm;
+	      table += "<div style='width:100%;border:1px solid #cacaca;display:inline-block;' onclick='javascript:center_search_click(this);' >";
+	      table +="<div style='height:20px;line-height:20px;background:#F4FFFD' >"+center_cd+"</div>"+
+	 			     "<div style='height:20px;line-height:20px;' >"+center_NM+"</div>";
+	      table+="</div>";   
+	      }
+	      $('#center_result').html(table);
 		}
 	      });
 	      }
@@ -264,7 +309,7 @@ function creditor_search(){
 			</tr>
 			<tr>
 				<td>위 치</td>
-				<td><input id="center_NM" type="text" style="" name="center_NM"
+				<td><input id="center_cd" type="text" style="" name="center_cd"
 					onclick="javascript:center_modal()" /></td>
 				<td>마 감 일</td>
 				<td><input id="exp_D" type="text" style="" name="exp_D"
@@ -362,6 +407,44 @@ function creditor_search(){
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">저장</button>
 				<button type="reset" class="btn btn-default">다시입력</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-------------------------------------------------------------------------------- 위치 모달 ---------------------------------------------------------------->
+<!-------------------------------------------------------------------------------- 위치 모달 ---------------------------------------------------------------->
+
+<div class="modal fade" id="center_modal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div style="font-size: 18px; color: #186dbf; font-weight: bold;">
+					<a> 센 터 검 색</a>
+				</div>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div style="background-color: #cacaca; padding: 5px 15px">
+					<select style="height: 26px;" id="center_criteria">
+						<option value="center_cd">센터코드</option>
+						<option value="center_NM">센터명</option>
+					</select> <input id="center_key" name="center_key"
+						style="height: 26px; width: 70%" /> <span class="material-icons"
+						onclick="javascript:center_search()" style="vertical-align: middle">
+						search</span>
+				</div>
+				<form action="">
+					<div class="contentbox" style="overflow: scroll;" id="center_result">
+						<!--      검색 결과 넣는 곳 -->
+					</div>	
+				</form>
+			</div>
+			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			</div>
 		</div>

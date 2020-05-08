@@ -120,11 +120,8 @@ function creditor_search_click(obj){
 	}
 function center_search_click(obj){
 	var cd=$(obj).children().eq(0).text();
-	var nm=$(obj).children().eq(1).text();
 	document.getElementById("center_cd").value = cd;
-	document.getElementById("center_NM").value = nm;
     $("#center_modal").modal("hide");
-	
 	}
 function creditor_search(){
 	   if($('#creditor_key').val()=='') {
@@ -180,10 +177,10 @@ function center_search(){
 	      for (var i = 0; i < data.length; i++) {
 	    	  var center_cd = data[i].cate_cd;
 	    	  var center_NM = data[i].cate_nm;
-	      table += "<div style='width:100%;border:1px solid #cacaca;' onclick='javascript:creditor_search_click(this);display:inline-block' >";
+	      table += "<div style='width:100%;border:1px solid #cacaca;display:inline-block;' onclick='javascript:center_search_click(this);' >";
 	      table +="<div style='height:20px;line-height:20px;background:#F4FFFD' >"+center_cd+"</div>"+
 	 			     "<div style='height:20px;line-height:20px;' >"+center_NM+"</div>";
-	      table+="</div>";    
+	      table+="</div>";   
 	      }
 	      $('#center_result').html(table);
 		}
@@ -312,7 +309,7 @@ function center_search(){
 			</tr>
 			<tr>
 				<td>위 치</td>
-				<td><input id="center_NM" type="text" style="" name="center_NM"
+				<td><input id="center_cd" type="text" style="" name="center_cd"
 					onclick="javascript:center_modal()" /></td>
 				<td>마 감 일</td>
 				<td><input id="exp_D" type="text" style="" name="exp_D"

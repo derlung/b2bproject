@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.spring.domain.CustomerVO"%>
 <jsp:include page="../layout/header3.jsp"></jsp:include>
- <section>
+<section>
                <article class="contents">
           <div class="form_header">
             <form action="">
@@ -55,27 +57,18 @@
                     <th>센터</th>
                     <th>담당MA</th>
                   </tr>
-
+				  <c:forEach var="vo" items="${list_c}">	
                   <tr>
                     <td>1</td>
-                    <td><a href="#">11001</a></td>
-                    <td>스파클 1호점</td>
-                    <td>6088112345</td>
-                    <td>주식회사 스파클</td>
-                    <td>서울시 노원구 평화로 86-2</td>
-                    <td>1000</td>
-                    <td>홍길동</td>
+                    <td><a href="#">${vo.customer_cd}</a></td>
+                    <td>${vo.pre_NM}</td>
+                    <td>${vo.customer_rcd}</td>
+                    <td>${vo.customer_NM}</td>
+                    <td>${vo.address}</td>
+                    <td>${vo.center_FK}</td>
+                    <td>${vo.emp_NM}</td>
                   </tr>
-                  <tr>
-                    <td>2</td>
-                    <td><a href="#">11001</a></td>
-                    <td>스파클 2호점</td>
-                    <td>6088112345</td>
-                    <td>주식회사 스파클</td>
-                    <td>서울시 용산구 기린로 56-2</td>
-                    <td>1000</td>
-                    <td>홍길동</td>
-                  </tr>
+                  </c:forEach>
                 </table>
               </div>
             </div>

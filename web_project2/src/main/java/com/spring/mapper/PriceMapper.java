@@ -6,4 +6,5 @@ import com.spring.domain.PriceVO;
 
 public interface PriceMapper {
 	public List<PriceVO> priceList();
+	
 }

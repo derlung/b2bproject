@@ -12,4 +12,9 @@
 			left join origin_tb on origin_cd=origin_fk) on pt_fk=pt_cd
 </select>
 
+<select id="customerList" resultType="com.spring.domain.CustomerVO">
+select customer_cd, pre_nm, customer_rcd, customer_nm, c.address, center_fk, emp_nm from customer_tb c
+left join emp_tb e on c.emp_fk = e.emp_cd
+</select>
+
 </mapper>

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.ProductVO;
 import com.spring.service.ProductService;
+import com.spring.service.SalesService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +30,9 @@ import lombok.extern.slf4j.Slf4j;
 public class StandartizeController {
 	@Autowired
 	ProductService service;
+	
+	@Autowired
+	SalesService service3;
 	
 	@GetMapping(value="product_view")
 	public void product_view(Model model) {
@@ -59,8 +63,13 @@ public class StandartizeController {
 	}
 	
 	@GetMapping(value="customer_view")
-	public void customer_view() {
+	public void customer_view(Model model) {
 		log.info("고객사 페이지");
+		try {
+			model.addAttribute("list_c",service3.customerList());			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
 		
 	}
 	

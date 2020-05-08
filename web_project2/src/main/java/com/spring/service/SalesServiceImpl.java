@@ -22,8 +22,9 @@ public class SalesServiceImpl implements SalesService {
 	}
 
 	@Override
-	public List<CustomerVO> customerList() throws Exception {		
+	public List<CustomerVO> customerList() throws Exception {
 		return mapper.customerList();
 	}
+
 
 }

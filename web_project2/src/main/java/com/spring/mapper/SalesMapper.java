@@ -8,4 +8,5 @@ import com.spring.domain.SalesVO;
 public interface SalesMapper {
 	public List<SalesVO> salesList();
 	public List<CustomerVO> customerList();
+	
 }

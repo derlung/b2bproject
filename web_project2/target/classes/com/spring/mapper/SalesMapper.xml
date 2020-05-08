@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.SalesMapper">
 
+<!-- 판매상품 리스트 -->
 <select id="salesList" resultType="com.spring.domain.SalesVO">
 	select center_fk,pt_fk,pt_nm,unit,origin_nm,storage_nm,tax_nm,sale_cost,exp_D,exp_T
 	from productcon_tb left join 
@@ -12,9 +13,10 @@
 			left join origin_tb on origin_cd=origin_fk) on pt_fk=pt_cd
 </select>
 
+<!-- 구매처 리스트 -->
 <select id="customerList" resultType="com.spring.domain.CustomerVO">
-select customer_cd, pre_nm, customer_rcd, customer_nm, c.address, center_fk, emp_nm from customer_tb c
-left join emp_tb e on c.emp_fk = e.emp_cd
+	select customer_cd, pre_nm, customer_rcd, customer_nm, c.address, center_fk, emp_nm from customer_tb c
+	left join emp_tb e on c.emp_fk = e.emp_cd
 </select>
-
+ 
 </mapper>

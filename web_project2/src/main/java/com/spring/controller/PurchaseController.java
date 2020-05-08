@@ -36,11 +36,15 @@ public class PurchaseController {
 		log.info("매입처리 페이지");
 		
 	}
+	
+	
 	@GetMapping(value="purchase_ledger")
 	public void purchase_ledger() {
 		log.info("매입원장 페이지");
 		
 	}
+	
+	
 	@GetMapping(value="price_view")
 	public void price_view(Model model) {
 		log.info("단가조회 페이지");

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.SalesMapper">
+
+<select id="salesList" resultType="com.spring.domain.SalesVO">
+	select center_fk,pt_fk,pt_nm,unit,origin_nm,storage_nm,tax_nm,sale_cost,exp_D,exp_T
+	from productcon_tb left join 
+		(select origin_nm,unit,pt_cd,pt_nm,storage_nm,tax_nm,cate_nm from product_tb
+			left join storage_tb on storage_fk=storage_cd
+			left join tax_tb on tax_fk=tax_cd
+			left join category_tb on cate_cd=category_fk
+			left join origin_tb on origin_cd=origin_fk) on pt_fk=pt_cd
+</select>
+
+</mapper>

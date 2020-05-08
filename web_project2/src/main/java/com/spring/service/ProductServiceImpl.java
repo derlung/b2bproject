@@ -43,5 +43,12 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.getOrigin();
 	}
 
+	@Override
+	public ProductVO productSearch(int pt_cd, String pt_NM) throws Exception {		
+		return mapper.productSearch(pt_cd, pt_NM);
+	}
+
+	
+	
 	
 }

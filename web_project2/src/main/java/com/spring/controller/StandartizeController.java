@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +41,16 @@ public class StandartizeController {
 			e.printStackTrace();
 		}		
 	}
+	
+	
+	//상품 조건 검색
+//	@GetMapping("/{pt_cd},{pt_NM}")
+//	public ResponseEntity<ProductVO> get(@PathVariable("pt_cd") int pt_cd, @PathVariable("pt_NM")String pt_NM) throws Exception{
+//		log.info("상품 검색"+pt_cd,pt_NM);
+//		return new ResponseEntity<>(ProductService.productSearch(pt_cd,pt_NM),HttpStatus.OK);			
+//	}
+	
+	
 	
 	@GetMapping(value="creditor_view")
 	public void creditor_view() {

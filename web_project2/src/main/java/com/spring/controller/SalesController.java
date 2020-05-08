@@ -2,11 +2,15 @@ package com.spring.controller;
 
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.spring.service.ProductService;
+import com.spring.service.SalesService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,16 +18,30 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/sales/*")
 public class SalesController {
+	
+	@Autowired
+	SalesService service3;
+	
+	@Autowired
+	ProductService service;
+	
 	@GetMapping(value="sales_creation")
-	public void sales_creation() {
+	public void sales_creation(Model model) {
 		log.info("매출등록 페이지");
+		try {
+			model.addAttribute("list2",service3.salesList());			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
 		
 	}
+	
 	@GetMapping(value="sales_ledger")
 	public void sales_ledger() {
 		log.info("매출원장 페이지");
 		
 	}
+	
 	@GetMapping(value="sales_exception_price")
 	public void sales_exception_price() {
 		log.info("판가관리 페이지");

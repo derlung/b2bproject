@@ -1,6 +1,9 @@
+<%@page import="java.util.List"%>
+<%@page import="com.spring.domain.SalesVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="../layout/header3.jsp"></jsp:include>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"
 	type="text/javascript"></script>
@@ -128,21 +131,23 @@ function customer_modal() {
                     <th>마감일</th>
                     <th>마감시간</th>
                   </tr>
+                  <c:forEach var="vo" items="${list2}">
   <tr>
                   <td><input type="checkbox" /></td>
-                  <td>1000</td>
-                  <td>10001</td>
-                  <td>흙당근(상품 130~200g/개 20Kg/BOX)</td>
-                  <td>BOX</td>
-                  <td>KR</td>
-                  <td>상온</td>
-                  <td>면세</td>
-                                  <td>1500</td>
+                  <td>${vo.center_FK}</td>
+                  <td>${vo.pt_FK}</td>
+                  <td>${vo.pt_NM}</td>
+                  <td>${vo.unit}</td>
+                  <td>${vo.origin_NM}</td>
+                  <td>${vo.storage_NM}</td>
+                  <td>${vo.tax_NM}</td>
+                  <td>1500</td>
                   <td>150</td>
-                  <td>1650</td>
-                  <td>D-1</td>
-                  <td>14:00</td>
+                  <td>${vo.tax_NM}</td>
+                  <td>${vo.exp_D}</td>
+                  <td>${vo.exp_T}</td>
                 </tr>
+                </c:forEach>
                 </table>
               </div>
             </div>

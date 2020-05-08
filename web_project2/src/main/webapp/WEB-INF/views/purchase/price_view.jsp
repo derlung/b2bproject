@@ -7,7 +7,7 @@
 <script>
 $(function(){
 	
-$('.pt_modal').on('hide.bs.modal', function (e) {
+$('#pt_modal').on('hide.bs.modal', function (e) {
 	 $('#pt_result').html("");
      $('#pt_key').val('');
      $('#pt_criteria').val('pt_cd');
@@ -30,10 +30,7 @@ $('.pt_modal').on('hide.bs.modal', function (e) {
       $(".edit_row").hide();
    }
    function pt_modal_close() {
-		 $('#pt_result').html("");
-	     $('#pt_key').val('');
-	     $('#pt_criteria').val('pt_cd');
-	      $(".pt_modal").hide();
+	      $("#pt_modal").modal("hide");
 	   }
    function edit_close(trObj) {
 	      // 변경 창 닫기
@@ -100,9 +97,10 @@ function pt_search_click(obj){
 	var nm=$(obj).children().eq(1).text();
 	document.getElementById("pt_cd").value = cd;
 	document.getElementById("pt_NM").value = nm;
-	 $(".pt_modal").hide();
+    $("#pt_modal").modal("hide");
 	
 	}
+	
 </script>
 <section>
 	<article class="contents">

@@ -72,42 +72,39 @@ function customer_modal() {
               </div>
               <div class="formbox">
               <div>
-              	<label for="">업체코드</label>
-              	<input type="text" onclick="javascript:customer_modal()">
-              	<label for="">업체명</label>
-              	<input type="text" readonly>
-              </div>
-                <label for="">
+              	<label for="" style="padding:0 5px 0 20px;">업체코드</label>
+              	<input  onclick="javascript:customer_modal()">
+              	<label for="" style="padding:0 5px 0 20px;">업 체 명</label> 
+              	<input  readonly>
+                <label for="" style="padding:0 5px 0 20px;">
                   <a id="point-star">*</a>
-                  <span>인수일자</span>
+                  <span style="padding:0 ">인수일자</span>
                   <input type="text" id="datePicker" class="form-control"
 						value="2020-05-06" style="display: inline; width: 300px">
                 </label>
+              </div>
 
-                <label for="">
+                <label for="" style="padding:0 5px 0 20px;">
                   <a id="point-star">*</a>
-                  <span>출고처</span>
-                  <input type="text" />
+                  <span style="padding:0 ">출 고 처</span>
+                  <input  />
                 </label>
 
-                <label for="">
-                  <span>상품코드/명</span>
-                  <input type="text" />
+                <label for="" style="padding:0 5px 0 20px;">
+                  <span style="padding:0 ">상품코드/명</span>
+                  <input  />
                 </label>
 
-                <label for="">
-                    <span>총 주문금액</span>
-                    <input type="text"/>
+                <label for="" style="padding:0 5px 0 20px;">
+                    <span style="padding:0 ">총 주문금액</span>
+                    <input />
                   </label>
               </div>
             </form>
           </div>
 
-
-       
-
           <!--본문박스 / 스크롤 없애려면 hidden -->
-          <div class="contentbox" style="overflow: scroll ;height:400px;">
+          <div class="contentbox" style="overflow: scroll ;height:300px;">
             <div>
               <div class="table">
                 <table>
@@ -157,7 +154,7 @@ function customer_modal() {
                 </span>
             </div>
 
-            <div class="contentbox" style="overflow: scroll ;height:400px;">
+            <div class="contentbox" style="overflow: scroll ;height:300px;"> 
               <div>
                 <div class="table">
                   <table>
@@ -244,8 +241,7 @@ function customer_modal() {
 				</div>
 				<form action="">
 					<div class="contentbox" style="overflow: scroll;">
-						<!-- 					검색 결과 넣는 곳 -->
-
+						<!-- 					검색 결과 넣는 곳 							-->
 					</div>
 				</form>
 			</div>

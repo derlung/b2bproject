@@ -5,6 +5,15 @@
 <jsp:include page="../layout/header3.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
+$(function(){
+	
+$('.pt_modal').on('hide.bs.modal', function (e) {
+	 $('#pt_result').html("");
+     $('#pt_key').val('');
+     $('#pt_criteria').val('pt_cd');
+	})
+	
+}) 
    function changeTrColor(trObj, oldColor, newColor) {
       //행 마우스 올리면 색변환
       trObj.style.backgroundColor = newColor;
@@ -15,12 +24,25 @@
    function clickTrEvent(trObj) {
       // 행 클릭시 변경 창 보이기
       $(".edit_row").show();
-
    }
    function edit_close(trObj) {
       // 변경 창 닫기
       $(".edit_row").hide();
    }
+   function pt_modal_close() {
+		 $('#pt_result').html("");
+	     $('#pt_key').val('');
+	     $('#pt_criteria').val('pt_cd');
+	      $(".pt_modal").hide();
+	   }
+   function edit_close(trObj) {
+	      // 변경 창 닫기
+	      $(".edit_row").hide();
+	   }
+   function edit_close(trObj) {
+	      // 변경 창 닫기
+	      $(".edit_row").hide();
+	   }
    function pt_modal() {
       $("#pt_modal").modal("show");
    }
@@ -51,11 +73,36 @@
 				'keyword':keyword},
 	      success:function(data){
 	      //성공하면 select.php에서 뿌린 데이터를 data 변수에 담아 모달-바디에 붙여라
-	      $('pt_result').html(data);
+	      var table ="";
+	      for (var i = 0; i < data.length; i++) {
+	    	  var pt_cd = data[i].pt_cd;
+	    	  var pt_NM = data[i].pt_NM;
+	    	  var cate_NM = data[i].cate_NM;
+	    	  var unit = data[i].unit;
+	    	  var origin_NM = data[i].origin_NM;
+	    	  var tax_NM = data[i].tax_NM;
+	    	  var storage_NM = data[i].storage_NM;
+	    	  var exp_D = data[i].exp_D;
+	     
+	    	  table += "<div style='width:100%;border:1px solid #cacaca;' onclick='javascript:pt_search_click(this)'>";
+	      table+="<div style='float:left;height:40px;line-height:40px;background:#FFFFFF';padding:5px; class='cd'' >"+pt_cd+" </div>"+
+	      			"<div style='height:20px;line-height:20px;background:#F4FFFD' >"+pt_NM+"</div>"+
+	      			"<div style='height:20px;line-height:20px;display:inline-flex;justify-content:space-around;'><div>"+cate_NM+"</div><div>"+origin_NM+"</div></div>";
+	      table+="</div>";
+		}
+	      $('#pt_result').html(table);
 	      }
 	      });
 	      };
+function pt_search_click(obj){
 
+	var cd=$(obj).children().eq(0).text();
+	var nm=$(obj).children().eq(1).text();
+	document.getElementById("pt_cd").value = cd;
+	document.getElementById("pt_NM").value = nm;
+	 $(".pt_modal").hide();
+	
+	}
 </script>
 <section>
 	<article class="contents">
@@ -112,35 +159,35 @@
 				<div class="table">
 					<table>
 						<tr>
-							<th>선택</th>
-							<th>센터</th>
-							<th>상품</th>
-							<th>단위</th>
-							<th>원산지</th>
-							<th>보관방법</th>
-							<th>면/과세</th>
-							<th>매입단가</th>
-							<th>구매처명</th>
-							<th>카테고리</th>
-							<th>카테고리명</th>
-							<th>MD</th>
+							<th style="padding: .4rem;">선택</th>
+							<th style="padding: .4rem;">센터</th>
+							<th style="padding: .4rem;">상품</th>
+							<th style="padding: .4rem;">단위</th>
+							<th style="padding: .4rem;">원산지</th>
+							<th style="padding: .4rem;">보관방법</th>
+							<th style="padding: .4rem;">면/과세</th>
+							<th style="padding: .4rem;">매입단가</th>
+							<th style="padding: .4rem;">구매처명</th>
+							<th style="padding: .4rem;">카테고리</th>
+							<th style="padding: .4rem;">카테고리명</th>
+							<th style="padding: .4rem;">MD</th>
 						</tr>
 						<c:forEach var="vo" items="${list}">
 							<tr
 								onmouseover="javascript:changeTrColor(this, '#FFFFFF', '#F4FFFD')"
 								onclick="javascript:clickTrEvent(this)">
-								<td><input type="checkbox" /></td>
-								<td>${vo.center_FK}</td>
-								<td>${vo.pt_NM}</td>
-								<td>${vo.unit}</td>
-								<td>${vo.origin_FK}</td>
-								<td>${vo.storage_NM}</td>
-								<td>${vo.tax_NM}</td>
-								<td><input type="text" value="${vo. purchase_cost}" /></td>
-								<td>${vo.creditor_FK}</td>
-								<td>${vo.creditor_NM}</td>
-								<td>${vo.cate_NM}</td>
-								<td>홍길동</td>
+								<td style="padding: .4rem;"><input type="checkbox" /></td>
+								<td style="padding: .4rem;">${vo.center_FK}</td>
+								<td style="padding: .4rem;">${vo.pt_NM}</td>
+								<td style="padding: .4rem;">${vo.unit}</td>
+								<td style="padding: .4rem;">${vo.origin_FK}</td>
+								<td style="padding: .4rem;">${vo.storage_NM}</td>
+								<td style="padding: .4rem;">${vo.tax_NM}</td>
+								<td style="padding: .4rem;"><input type="text" value="${vo. purchase_cost}" /></td>
+								<td style="padding: .4rem;">${vo.creditor_FK}</td>
+								<td style="padding: .4rem;">${vo.creditor_NM}</td>
+								<td style="padding: .4rem;">${vo.cate_NM}</td>
+								<td style="padding: .4rem;">홍길동</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -229,13 +276,13 @@
 					</div>
 				</div>
 				<form action="">
-					<div class="contentbox" style="overflow: scroll;">
+					<div id="pt_result"class="contentbox" style="overflow: scroll;height:500PX">
 						<!--                검색 결과 넣는 곳 -->
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:pt_modal_close()">닫기</button>
 			</div>
 		</div>
 	</div>
@@ -300,16 +347,15 @@
 					<select style="height: 26px;">
 						<option value="center_cd">센터코드</option>
 						<option value="center_nm">센터명</option>
-					</select> <input id="search_value" name="search_value"
-						style="height: 26px; width: 70%" /> <span class="material-icons"
-						onclick="javascript:pt_search()" style="vertical-align: middle">
+					</select> 
+					<input id="search_value" name="search_value"	style="height: 26px; width: 70%" /> 
+					<span class="material-icons"	onclick="javascript:pt_search()" style="vertical-align: middle">
 						search</span>
 				</div>
 			</div>
 			<form action="">
-				<div id="pt_result" class="contentbox" style="overflow: scroll;">
+				<div id="" class="contentbox" style="overflow: scroll;">
 					<!--                검색 결과 넣는 곳 -->
-
 				</div>
 			</form>
 			<div class="modal-footer">

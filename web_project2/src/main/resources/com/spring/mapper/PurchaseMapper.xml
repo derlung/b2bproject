@@ -4,8 +4,12 @@
 
 	<!-- 상품 검색-->
 	<select id="search_pt" resultType="com.spring.domain.ProductVO">
-		select * 
-		from product_tb
+		select pt_cd,pt_NM,unit,tax_NM,origin_NM,storage_NM,exp_D,cate_NM
+from PRODUCT_TB p left join tax_tb t on p.tax_fk =t.tax_cd
+left join origin_tb o on p.origin_fk = o.origin_cd
+left join storage_tb s on p.storage_fk = s.storage_cd
+left join category_tb c on p.category_fk = c.cate_cd
+left join emp_tb e on p.emp_fk = e.emp_cd
 		where
 		<if test="criteria=='pt_nm'">
 			pt_nm Like '%'||#{keyword}||'%'

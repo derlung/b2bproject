@@ -4,7 +4,7 @@
 
 	<!-- 상품 검색-->
 	<select id="search_pt" resultType="com.spring.domain.ProductVO">
-		select pt_cd,pt_NM,unit,tax_NM,origin_NM,storage_NM,exp_D,cate_NM
+		select pt_cd,pt_NM,unit,tax_NM,origin_NM,storage_NM,exp_D,cate_NM,purchase_rate
 from PRODUCT_TB p left join tax_tb t on p.tax_fk =t.tax_cd
 left join origin_tb o on p.origin_fk = o.origin_cd
 left join storage_tb s on p.storage_fk = s.storage_cd
@@ -19,7 +19,7 @@ left join emp_tb e on p.emp_fk = e.emp_cd
 		</if>
 	</select>
 	
-	<!--  검색-->
+	<!-- 구매처 검색-->
 	<select id="search_creditor" resultType="com.spring.domain.CreditorVO">
 		select creditor_cd , creditor_NM,pre_NM,Address
 		from creditor_tb
@@ -29,6 +29,20 @@ left join emp_tb e on p.emp_fk = e.emp_cd
 		</if>
 		<if test="criteria=='creditor_cd'">
 			Creditor_cd Like '%'||#{keyword}||'%'
+		</if>
+	</select>
+	
+		<!-- 위치 검색-->
+		<!-- 		CateVO와 데이터타입이 같아 그냥 쓰기로함 -->
+	<select id="search_center" resultType="com.spring.domain.CateVO">
+		select center_cd cate_cd , center_NM cate_nm 
+		from center_tb
+		where
+		<if test="criteria=='center_NM'">
+			center_nm Like '%'||#{keyword}||'%'
+		</if>
+		<if test="criteria=='center_cd'">
+			center_cd Like '%'||#{keyword}||'%'
 		</if>
 	</select>
 </mapper>

@@ -15,10 +15,7 @@
    google.charts.load("current", {packages:["corechart"]});
    google.charts.setOnLoadCallback(drawChart);
 
-   function drawChart() {
-   	
-   	
-   	
+   function drawChart() {   	
        let supply = new Array();  
 		
   		<c:forEach var="vo" items="${chart2}">
@@ -31,6 +28,7 @@
  			</c:forEach>
 	
 				console.log(supply);
+				
 				
 				
      var data = google.visualization.arrayToDataTable([
@@ -59,7 +57,7 @@
       };
       var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
       chart.draw(view, options);
-  }
+  };
   </script>
 <div id="barchart_values" style="width: 100%; height: 400px;"></div>
 

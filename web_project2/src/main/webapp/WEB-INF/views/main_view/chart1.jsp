@@ -62,7 +62,8 @@
           document.getElementById("chart_div")
         );
         chart.draw(data, options);
-      }
+      };
+    	   
     </script>
     
   

@@ -1,5 +1,8 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page isELIgnored ="false" %> 
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
    <jsp:include page="../layout/header3.jsp"></jsp:include>  
     <!--FONT-->
     <link
@@ -14,6 +17,9 @@
       rel="stylesheet"
     />
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"type="text/javascript">
+  </script>
    <style>
       .main-1 {
         width: 100%;
@@ -231,6 +237,7 @@
                       <div class="card-content">
                      
                         <c:out value="${getDaySum}" default="0" />
+                        
                       </div>    	
                     </div> 
                     <div class="main-card-right">     

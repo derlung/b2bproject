@@ -175,7 +175,7 @@
  
   </head>
   <body>
-      <section>
+       <section>
         <!--본문영역-->
         <article class="contents">
           <div class="main-1">           
@@ -184,7 +184,7 @@
                 <div class="main-card-1">
                    <div class="main-card-left">
                       <div class="card-header">
-                        일 매출
+                        일 매출 (팀별)
                       </div>
                      
                       <div class="card-content">
@@ -205,7 +205,7 @@
                 <div class="main-card-1">
                    <div class="main-card-left">
                       <div class="card-header">
-                        월 누적 매출
+                        월 매출 (팀별)
                       </div>
                      
                       <div class="card-content">
@@ -229,8 +229,9 @@
                       </div>
                      
                       <div class="card-content">
-                        500000
-                      </div>    
+                     
+                        <c:out value="${getDaySum}" default="0" />
+                      </div>    	
                     </div> 
                     <div class="main-card-right">     
                       <span id="card-icon">            
@@ -249,7 +250,9 @@
                       </div>
                      
                       <div class="card-content">
-                        500000
+                        <c:out value="${getMonthSum}" />
+                        
+                        
                       </div>    
                     </div> 
                     <div class="main-card-right">     
@@ -273,7 +276,7 @@
                     월 매출 현황
                   </div>
 
-                  <div id="chart1">
+                  <div id="chart1">         
                   <jsp:include page="../main_view/chart1.jsp"></jsp:include>
                 </div>
               </div>

@@ -9,11 +9,12 @@ import com.spring.domain.MainVO;
 import com.spring.mapper.MainViewMapper;
 
 
+
 @Service
 public class MainViewServiceImpl implements MainViewService {
 	
 	@Autowired
-	private MainViewMapper mapper;
+	MainViewMapper mapper;
 
 	@Override
 	public List<MainVO> chart1() throws Exception {
@@ -33,6 +34,18 @@ public class MainViewServiceImpl implements MainViewService {
 	@Override
 	public List<MainVO> chart2() throws Exception {
 		return mapper.chart2();
+	}
+
+	@Override
+	public int getMonthTeam() throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.getMonthTeam();
+	}
+
+	@Override
+	public int getDayTeam() throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.getDayTeam();
 	}
 
 }

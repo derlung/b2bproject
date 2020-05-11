@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page isELIgnored ="false" %> 
@@ -194,7 +193,7 @@
                       </div>
                      
                       <div class="card-content">
-                        500000
+                          <c:out value="${getDayTeam}" default="0" />
                       </div>    
                     </div> 
                     <div class="main-card-right">     
@@ -215,7 +214,7 @@
                       </div>
                      
                       <div class="card-content">
-                        500000
+                         <c:out value="${getMonthTeam}" default="0" />
                       </div>    
                     </div> 
                     <div class="main-card-right">     

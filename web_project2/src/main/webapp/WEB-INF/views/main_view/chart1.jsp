@@ -1,27 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
    <html>
   <head>
-    <script
-      type="text/javascript"
-      src="https://www.gstatic.com/charts/loader.js"
-    ></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"	type="text/javascript"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"	type="text/javascript"></script>
+
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+  
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" ></script>
+
+
+  
     <script type="text/javascript">
       google.charts.load("current", { packages: ["corechart"] });
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
-    	   function drawChart() {
-    	    	  
-    	    	  
     	          let supply = new Array();  
     								
-    	   	    		<c:forEach var="vo" items="${chart1}">
-    							var result = "${vo.chart1_supply}";   	
+    	   	    		<c:forEach var="vo" items="${chart1}" >
+    	   	    				var result = "${vo.chart1_supply}";
     							var sum;
     			      	   		sum = parseInt(result);
     			      	   		supply.push(sum);
-    			      	   		
-
     		      			</c:forEach>
     				
     							console.log(supply);

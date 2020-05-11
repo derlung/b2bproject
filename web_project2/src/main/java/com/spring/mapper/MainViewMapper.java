@@ -12,7 +12,8 @@ public interface MainViewMapper {
 	public int getMonthSum();
 	public int getDaySum();
 	public List<MainVO> chart2();
-	
+	public int getMonthTeam();
+	public int getDayTeam();
 }
 
 	

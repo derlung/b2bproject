@@ -21,5 +21,7 @@ public class ProductVO {
 	private int emp_fk;		// 결재자
 	private String emp_NM;	// 결재자 이름
 	private String purchase_rate;	// 매익률
-
+	
+	private String search_pt_cd;
+	private String search_category_fk;
 }

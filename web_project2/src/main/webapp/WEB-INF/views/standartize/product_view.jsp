@@ -150,7 +150,7 @@
 	<!--본문영역-->
 	<article class="contents">
 		<div class="form_header">
-			<form action="">
+			<form id="search" action="" method="get">
 				<div class="contents_header">
 					<span class="material-icons"> assignment </span> <a> 상품관리</a>
 				</div>
@@ -158,14 +158,14 @@
 					<button type="button" onclick="javascript:add_edit();">
 						<span class="material-icons"> post_add </span>신규
 					</button>
-					<button type="submit">
+					<button type="submit" >
 						<span class="material-icons"> search </span> 조회
 					</button>
 				</div>
 				<div class="formbox">
 					<label for=""> <a id="point-star">*</a> <span>상품명/코드</span>
-						<input type="text" />
-					</label> <label for=""> <span>카테고리</span> <input type="text" />
+						<input type="text" name="keyword" value="${keyword }"/>
+					</label> <label for=""> <span>카테고리</span> <input type="text" name="category" value="${category }"/>
 					</label>
 				</div>
 			</form>
@@ -335,4 +335,5 @@
 	$("#cate_a").select2();
 	$("#origin_a").select2();
 </script>
+
 <jsp:include page="../layout/footer.jsp"></jsp:include>

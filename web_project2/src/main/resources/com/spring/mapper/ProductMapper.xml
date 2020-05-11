@@ -2,13 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.ProductMapper">
 
+<!-- 상품 검색 & 색인 검색 -->
 <select id="getList" resultType="com.spring.domain.ProductVO">
-select /*+INDEX_DESC(product_tb pk_product_tb)*/rownum rn,pt_cd,pt_NM,unit,tax_NM,origin_NM,storage_NM,exp_D,category_fk,cate_NM,emp_fk,emp_NM
-from PRODUCT_TB p left join tax_tb t on p.tax_fk =t.tax_cd
-left join origin_tb o on p.origin_fk = o.origin_cd
-left join storage_tb s on p.storage_fk = s.storage_cd
-left join category_tb c on p.category_fk = c.cate_cd
-left join emp_tb e on p.emp_fk = e.emp_cd
+
+	select *
+	from(select /*+INDEX_DESC(product_tb pk_product_tb)*/rownum rn,pt_cd,pt_NM,unit,tax_NM,origin_NM,storage_NM,exp_D,category_fk,cate_NM,emp_fk,emp_NM
+		from PRODUCT_TB p left join tax_tb t on p.tax_fk =t.tax_cd
+		left join origin_tb o on p.origin_fk = o.origin_cd
+		left join storage_tb s on p.storage_fk = s.storage_cd
+		left join category_tb c on p.category_fk = c.cate_cd
+		left join emp_tb e on p.emp_fk = e.emp_cd)
+	where pt_cd like '%'||#{search_pt_cd}||'%' and pt_NM like '%'||#{pt_NM}||'%' and category_fk like '%'||#{search_category_fk}||'%'
+
+    	
 </select>
 
 <!-- 상품 검색-->
@@ -64,5 +70,6 @@ left join emp_tb e on p.emp_fk = e.emp_cd
 </insert>
 <select id="getOrigin" resultType="com.spring.domain.OriginVO">
 	select origin_cd,origin_NM from origin_tb
-</select>
+</select>	
+
 </mapper>

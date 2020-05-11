@@ -11,15 +11,18 @@ import com.spring.domain.PriceVO;
 import com.spring.domain.ProductVO;
 import com.spring.mapper.ProductMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductMapper mapper;	
 	
 	@Override
-	public List<ProductVO> getList() throws Exception {
-		return mapper.getList() ;
+	public List<ProductVO> getList(ProductVO vo) throws Exception {
+		return mapper.getList(vo) ;
 	}
 
 	@Override
@@ -42,13 +45,6 @@ public class ProductServiceImpl implements ProductService {
 	public List<OriginVO> getOrigin() throws Exception {
 		return mapper.getOrigin();
 	}
-
-	@Override
-	public ProductVO productSearch(int pt_cd, String pt_NM) throws Exception {		
-		return mapper.productSearch(pt_cd, pt_NM);
-	}
-
-	
 	
 	
 }

@@ -31,4 +31,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 	public List<CateVO> search_center(SearchVO vo) {
 		return mapper.search_center(vo);
 	}
+
+	@Override
+	public List<CreditorVO> creditorList() {		
+		return mapper.creditorList();
+	}
 }

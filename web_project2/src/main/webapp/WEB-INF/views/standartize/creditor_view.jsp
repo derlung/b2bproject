@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../layout/header3.jsp"></jsp:include>
  <section>
         <article class="contents">
@@ -57,19 +58,20 @@
                     <th>이메일</th>
                     <th>담당MD</th>
                   </tr>
-
+				  <c:forEach var="vo" items="${list_cr}">				  
                   <tr>
-                    <td>1</td>
-                    <td><a href="#">1108112345</a></td>
-                    <td>(주)스파클</td>
-                    <td>천안시</td>
-                    <td>서울시 노원구 평화로 86-2</td>
-                    <td>도소매</td>
-                    <td>식품</td>
-                    <td>02-2000-1234</td>
-                    <td>abcd@efg.com</td>
-                    <td>홍길동</td>
+                    <td>${vo.rn}</td>
+                    <td><a href="#">${vo.creditor_cd}</a></td>
+                    <td>${vo.creditor_NM}</td>
+                    <td>${vo.pre_NM}</td>
+                    <td>${vo.address}</td>
+                    <td>${vo.business}</td>
+                    <td>${vo.issues}</td>
+                    <td>${vo.contact}</td>
+                    <td>${vo.email}</td>
+                    <td>${vo.emp_NM}</td>
                   </tr>
+                  </c:forEach>
                 </table>
               </div>
             </div>

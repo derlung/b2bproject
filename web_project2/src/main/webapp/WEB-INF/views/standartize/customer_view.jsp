@@ -57,7 +57,7 @@
                   </tr>
 				  <c:forEach var="vo" items="${list_c}">	
                   <tr>
-                    <td>1</td>
+                    <td>${vo.rn}</td>
                     <td><a href="#">${vo.customer_cd}</a></td>
                     <td>${vo.pre_NM}</td>
                     <td>${vo.customer_rcd}</td>

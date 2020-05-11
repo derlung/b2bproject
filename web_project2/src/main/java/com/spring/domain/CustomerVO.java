@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CustomerVO {
-   //private int rn;    //no
+   private int rn;    //no
    private long customer_cd; //고객코드
    private String pre_NM; //고객명
    private long customer_rcd; //사업자번호

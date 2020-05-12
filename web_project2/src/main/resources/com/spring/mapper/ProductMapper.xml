@@ -4,18 +4,38 @@
 
 <!-- 상품 검색 & 색인 검색 -->
 <select id="getList" resultType="com.spring.domain.ProductVO">
-
-	select *
-	from(select /*+INDEX_DESC(product_tb pk_product_tb)*/rownum rn,pt_cd,pt_NM,unit,tax_NM,origin_NM,storage_NM,exp_D,category_fk,cate_NM,emp_fk,emp_NM
-		from PRODUCT_TB p left join tax_tb t on p.tax_fk =t.tax_cd
-		left join origin_tb o on p.origin_fk = o.origin_cd
-		left join storage_tb s on p.storage_fk = s.storage_cd
-		left join category_tb c on p.category_fk = c.cate_cd
-		left join emp_tb e on p.emp_fk = e.emp_cd)
-	where pt_cd like '%'||#{search_pt_cd}||'%' and pt_NM like '%'||#{pt_NM}||'%' and category_fk like '%'||#{search_category_fk}||'%'
-
-    	
+<![CDATA[
+	select * 
+	from(
+		select rownum rn,pt_cd,pt_NM,unit,tax_NM,origin_NM,storage_NM,exp_D,category_fk,cate_NM,emp_fk,emp_NM
+		from(select pt_cd,pt_NM,unit,tax_NM,origin_NM,storage_NM,exp_D,category_fk,cate_NM,emp_fk,emp_NM
+			from PRODUCT_TB p left join tax_tb t on p.tax_fk =t.tax_cd
+			left join origin_tb o on p.origin_fk = o.origin_cd
+			left join storage_tb s on p.storage_fk = s.storage_cd
+			left join category_tb c on p.category_fk = c.cate_cd
+			left join emp_tb e on p.emp_fk = e.emp_cd order by pt_cd desc)	
+		where 
+	]]>	
+		<include refid="criteria"></include>
+	<![CDATA[   
+    	rownum <= #{pageNum}*#{amount})
+    	where rn> (#{pageNum}-1)*#{amount}
+     ]]>		
+	    	
 </select>
+
+<!-- 페이지 나누기를 위한 전체 상품 게시물 수 구하기 -->
+<select id="getTotalCount" resultType="int">
+<![CDATA[
+	select count(*)
+		from(select pt_cd    
+		from PRODUCT_TB p left join tax_tb t on p.tax_fk =t.tax_cd left join origin_tb o on p.origin_fk = o.origin_cd    
+		left join storage_tb s on p.storage_fk = s.storage_cd    left join category_tb c on p.category_fk = c.cate_cd   
+		left join emp_tb e on p.emp_fk = e.emp_cd where
+	]]>	
+		<include refid="criteria"></include>
+	pt_cd>0)
+	</select>
 
 <!-- 상품 검색-->
 <select id="search_pt2" resultType="com.spring.domain.ProductVO">
@@ -33,6 +53,33 @@
 <select id="getCate" resultType="com.spring.domain.CateVO">
 	select cate_cd,cate_NM from category_tb where cate_cd>0
 </select>
+
+
+<!-- 동적 sql -->
+<sql id="criteria">
+	<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+		<foreach collection="typeArr" item='type'>
+			<trim prefix="OR">
+				<choose>
+					<when test="type=='N'.toString()">
+						pt_cd like '%'||#{keyword}||'%'
+					</when>					
+					<when test="type=='S'.toString()">
+						pt_NM like '%'||#{keyword}||'%'
+					</when>					
+					<when test="type=='C'.toString()">
+						category_fk like '%'||#{category}||'%'						
+					</when>
+				</choose>
+			</trim>
+		</foreach>		
+	</trim>	
+</sql>	
+
+
+
+
+
 
 
 <update id="update_pt">

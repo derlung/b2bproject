@@ -3,6 +3,8 @@ package com.spring.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -11,6 +13,7 @@ import javax.mail.internet.AddressException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -59,33 +62,15 @@ public class HomeController {
 		
 		return "view/login";
 	}
-	
-	
-	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
 		log.info("메인 페이지");
-		try {
-			model.addAttribute("chart2", service.chart2());
-			model.addAttribute("chart1", service.chart1());
-			model.addAttribute("getMonthSum", service.getMonthSum());
-			model.addAttribute("getDaySum", service.getDaySum());
-			model.addAttribute("getMonthTeam", service.getMonthTeam());
-			model.addAttribute("getDayTeam", service.getDayTeam());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-				
-		return "view/main";
 		
+		return "view/main";
 	}
-	
-	
-	
-	
 	@RequestMapping(value = "/forgot-password", method = RequestMethod.GET)
 	public String forgotpw(Locale locale, Model model) {
 		log.info("비밀번호찾기 페이지");

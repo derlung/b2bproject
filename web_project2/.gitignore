@@ -105,4 +105,11 @@ hs_err_pid*
 ## ignoring target file
 target/
 
+
+web_project2/.classpath
+web_project2/src/main/webapp/WEB-INF/views/standartize/customer_view.jsp
+web_project2/target/m2e-wtp/web-resources/META-INF/maven/com.spring/controller/pom.properties
+
+
+
 # End of https://www.gitignore.io/api/java,eclipse,java-web,code-java

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page isELIgnored ="false" %> 
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
    <jsp:include page="../layout/header3.jsp"></jsp:include>  
     <!--FONT-->
     <link
@@ -14,6 +16,9 @@
       rel="stylesheet"
     />
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"type="text/javascript">
+  </script>
    <style>
       .main-1 {
         width: 100%;
@@ -175,7 +180,7 @@
  
   </head>
   <body>
-      <section>
+       <section>
         <!--본문영역-->
         <article class="contents">
           <div class="main-1">           
@@ -184,11 +189,11 @@
                 <div class="main-card-1">
                    <div class="main-card-left">
                       <div class="card-header">
-                        일 매출
+                        일 매출 (팀별)
                       </div>
                      
                       <div class="card-content">
-                        500000
+                          <c:out value="${getDayTeam}" default="0" />
                       </div>    
                     </div> 
                     <div class="main-card-right">     
@@ -205,11 +210,11 @@
                 <div class="main-card-1">
                    <div class="main-card-left">
                       <div class="card-header">
-                        월 누적 매출
+                        월 매출 (팀별)
                       </div>
                      
                       <div class="card-content">
-                        500000
+                         <c:out value="${getMonthTeam}" default="0" />
                       </div>    
                     </div> 
                     <div class="main-card-right">     
@@ -229,8 +234,10 @@
                       </div>
                      
                       <div class="card-content">
-                        500000
-                      </div>    
+                     
+                        <c:out value="${getDaySum}" default="0" />
+                        
+                      </div>    	
                     </div> 
                     <div class="main-card-right">     
                       <span id="card-icon">            
@@ -249,7 +256,9 @@
                       </div>
                      
                       <div class="card-content">
-                        500000
+                        <c:out value="${getMonthSum}" />
+                        
+                        
                       </div>    
                     </div> 
                     <div class="main-card-right">     
@@ -273,7 +282,7 @@
                     월 매출 현황
                   </div>
 
-                  <div id="chart1">
+                  <div id="chart1">         
                   <jsp:include page="../main_view/chart1.jsp"></jsp:include>
                 </div>
               </div>

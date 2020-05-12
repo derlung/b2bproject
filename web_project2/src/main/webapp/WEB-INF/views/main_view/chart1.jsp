@@ -1,30 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
    <html>
   <head>
-    <script
-      type="text/javascript"
-      src="https://www.gstatic.com/charts/loader.js"
-    ></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"	type="text/javascript"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"	type="text/javascript"></script>
+
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+  
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js" ></script>
+
+
+  
     <script type="text/javascript">
       google.charts.load("current", { packages: ["corechart"] });
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ["X", "매출"],
-          ["1월", 20],
-          ["2월", 35],
-          ["3월", 50],
-          ["4월", 10],
-          ["5월", 20],
-          ["6월", 20],
-          ["7월", 13],
-          ["8월", 85],
-          ["9월", 10],
-          ["10월", 15],
-          ["11월", 26],
-          ["12월", 12],
-        ]);
+    	          let supply = new Array();  
+    								
+    	   	    		<c:forEach var="vo" items="${chart1}" >
+    	   	    				var result = "${vo.chart1_supply}";
+    							var sum;
+    			      	   		sum = parseInt(result);
+    			      	   		supply.push(sum);
+    		      			</c:forEach>
+    				
+    							console.log(supply);
+    	   	   	
+    				      	   	
+    	        var data = google.visualization.arrayToDataTable([
+    	          ["X", "매출"],
+    	          ["1월", supply[0]],
+    	          ["2월",supply[1]],
+    	          ["3월",supply[2]],
+    	          ["4월",supply[3]],
+    	          ["5월",supply[4]],
+    	          ["6월",supply[5]],
+    	          ["7월",supply[6]],
+    	          ["8월",supply[7]],
+    	          ["9월",supply[8]],
+    	          ["10월",supply[9]],
+    	          ["11월",supply[10]],
+    	          ["12월",supply[11]],
+    	          
+    	        ]);
+
 
         var options = {
           legend: "none",
@@ -43,7 +64,8 @@
           document.getElementById("chart_div")
         );
         chart.draw(data, options);
-      }
+      };
+    	   
     </script>
     
   

@@ -1,28 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-    <script
-      type="text/javascript"
-      src="https://www.gstatic.com/charts/loader.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="https://www.gstatic.com/charts/loader.js"
-    ></script>
+    <script      type="text/javascript"      src="https://www.gstatic.com/charts/loader.js"    ></script>
+
 
    <script type="text/javascript">
-    google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawChart);
+   google.charts.load("current", {packages:["corechart"]});
+   google.charts.setOnLoadCallback(drawChart);
 
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["Element", "Density", { role: "style" } ],
-        ["영업1팀", 8.94, " #007cb4"],
-        ["영업2팀", 10.49, "#f86b6b"],
-        ["영업3팀", 19.30, "#80a700"],
-        ["영업4팀", 21.45, "#e09c44"]
-      ]);
+   function drawChart() {   	
+       let supply = new Array();  
+		
+  		<c:forEach var="vo" items="${chart2}">
+				var result = "${vo.chart2_supply}";   	
+				var sum;
+     	   		sum = parseInt(result);
+     	   		supply.push(sum);
+     	   		
+
+ 			</c:forEach>
+	
+				console.log(supply);
+				
+				
+				
+     var data = google.visualization.arrayToDataTable([
+       ["Element", "Density", { role: "style" } ],
+       ["영업1팀", supply[0], " #007cb4"],
+       ["영업2팀",  supply[1], "#f86b6b"],
+       ["영업3팀",  supply[2], "#80a700"],
+       ["영업4팀",  supply[3], "#e09c44"]
+     ]);
+
 
 
       var view = new google.visualization.DataView(data);
@@ -41,7 +52,7 @@
       };
       var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
       chart.draw(view, options);
-  }
+  };
   </script>
 <div id="barchart_values" style="width: 100%; height: 400px;"></div>
 

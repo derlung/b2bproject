@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.domain.CateVO;
+import com.spring.domain.Criteria;
 import com.spring.domain.OriginVO;
 import com.spring.domain.PriceVO;
 import com.spring.domain.ProductVO;
@@ -21,8 +22,8 @@ public class ProductServiceImpl implements ProductService {
 	private ProductMapper mapper;	
 	
 	@Override
-	public List<ProductVO> getList(ProductVO vo) throws Exception {
-		return mapper.getList(vo) ;
+	public List<ProductVO> getList(Criteria cri) throws Exception {
+		return mapper.getList(cri) ;
 	}
 
 	@Override
@@ -44,6 +45,12 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<OriginVO> getOrigin() throws Exception {
 		return mapper.getOrigin();
+	}
+	
+
+	@Override
+	public int totalRows(Criteria cri) throws Exception {		
+		return mapper.getTotalCount(cri);
 	}
 	
 	

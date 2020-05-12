@@ -3,15 +3,9 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../layout/header3.jsp"></jsp:include>
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"
-	type="text/javascript"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"
-	type="text/javascript">
-</script>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css"
-	rel="stylesheet" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
+<link	href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css"	rel="stylesheet" />
 <script>
 	function update_edit_close(trObj) {
 		$(".update_edit").hide();
@@ -142,10 +136,40 @@
 			}
 		});
 	}
+	
+	//검색버튼 클릭시
+	function search(){
+		//$("#searchbtn").click(function(){
+			let searchForm = $("#search");
+			
+			//입력값 확인 후 타입 넣어주기
+			let keyword=searchForm.find("input[name='keyword']").val();
+			let category=searchForm.find("input[name='category']").val();
+			
+			
+			//가져온 값이 숫자가 아닌 경우 타입 변환
+			if(isNaN(keyword)){
+				searchForm.find("input[name='type']").val("S");
+			}else if(keyword==''){
+				
+			}else{				
+				searchForm.find("input[name='type']").val("N");
+			}
+			
+			var type = searchForm.find("input[name='type']").val();
+			
+			if(category!==''){
+				type +="C";				
+				searchForm.find("input[name='type']").val(type);
+				console.log(type);
+			}
+			
+			
+			searchForm.submit();
+	//	})
+	
+	}
 </script>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css"
-	rel="stylesheet" />
 <section>
 	<!--본문영역-->
 	<article class="contents">
@@ -158,16 +182,17 @@
 					<button type="button" onclick="javascript:add_edit();">
 						<span class="material-icons"> post_add </span>신규
 					</button>
-					<button type="submit" >
+					<button type="button" onclick="search();">
 						<span class="material-icons"> search </span> 조회
 					</button>
 				</div>
 				<div class="formbox">
 					<label for=""> <a id="point-star">*</a> <span>상품명/코드</span>
-						<input type="text" name="keyword" value="${keyword }"/>
-					</label> <label for=""> <span>카테고리</span> <input type="text" name="category" value="${category }"/>
+						<input type="text" name="keyword" value="${cri.keyword}"/>
+					</label> <label for=""> <span>카테고리</span> <input type="text" name="category" value="${cri.category}"/>
 					</label>
 				</div>
+				<input type="hidden" name="type" value="${cri.type}"/>
 			</form>
 		</div>
 
@@ -209,6 +234,21 @@
 				</div>
 			</div>
 		</div>
+		<!-- start Pagination -->
+		<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+       <div class="text-center">
+        	<ul class="pagination">
+        		<c:if test="${pageVO.prev}">
+        			<li class="paginate_button previous"><a href="${pageVO.startPage-1}">Previous</a></li>
+        		</c:if>
+        		<c:forEach var="idx" begin="${pageVO.startPage}" end="${pageVO.endPage}">
+        			<li class="paginate_button ${cri.pageNum==idx?'active':''}"><a href="${idx}">${idx}</a></li>
+        		</c:forEach>
+        		<c:if test="${pageVO.next}">
+        			<li class="paginate_button next"><a href="${pageVO.endPage+1}">Next</a></li>
+        		</c:if>
+        	</ul>
+       </div>
 	</article>
 </section>
 
@@ -329,6 +369,31 @@
 		</table>
 	</form>
 </div>
+
+<%-------------------------------- 페이지 나누기 폼--%>
+<form action="product_view" id="myform">
+	<input type="hidden" name="keyword" value="${cri.keyword}" />
+	<input type="hidden" name="category" value="${cri.category}" />
+	<input type="hidden" name="type" value="${cri.type}" />
+	<input type="hidden" name="pageNum" value="${cri.pageNum}" />
+	<input type="hidden" name="amount" value="${cri.amount}" />
+</form>
+<%-------------------------------- 페이지 나누기 폼--%>
+<script>
+
+$(".paginate_button a").click(function(e){
+	e.preventDefault();
+	
+	let myform = $("#myform");
+	myform.find("input[name='pageNum']").val($(this).attr("href"));
+	myform.submit();	
+})
+
+	
+</script>
+
+
+
 <script>
 	$("#cate").select2();
 	$("#origin").select2();

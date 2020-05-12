@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.domain.Criteria;
+import com.spring.domain.PageVO;
 import com.spring.domain.ProductVO;
 import com.spring.service.ProductService;
 import com.spring.service.PurchaseService;
@@ -39,75 +41,57 @@ public class StandartizeController {
 	SalesService service2;
 	
 	@GetMapping(value="product_view")
-	public void product_view(String keyword, String category, Model model) {
-		log.info("상품 페이지");
-		ProductVO vo = new ProductVO();
+	public void product_view(@ModelAttribute("cri") Criteria cri,Model model) {
+		log.info("상품 페이지 "+cri);
+		
+		
 		try {
-			int search_pt_cd = Integer.parseInt(keyword);
-			vo.setSearch_pt_cd(search_pt_cd+"");
-			vo.setPt_NM("");
+			model.addAttribute("list",service.getList(cri));
 			
-			
-		} catch (Exception e) {
-			vo.setPt_NM(keyword);
-			vo.setSearch_pt_cd("");
-		}
-		vo.setSearch_category_fk(category);
-		
-		if(vo.getSearch_category_fk()==null) {
-			vo.setSearch_category_fk("");
-		}
-		if(vo.getSearch_pt_cd()==null) {
-			vo.setSearch_pt_cd("");
-		}
-		if(vo.getPt_NM()==null) {
-			vo.setPt_NM("");
-		}
-		
-		
-				
-		try {
-			model.addAttribute("list",service.getList(vo));			
+			int totalRows=service.totalRows(cri);
+			log.info("전체 갯수 "+totalRows);
+			model.addAttribute("pageVO", new PageVO(cri, totalRows));
 			model.addAttribute("cate",service.getCate());
 			model.addAttribute("origin",service.getOrigin());
-			
-			model.addAttribute("keyword", keyword);
-			model.addAttribute("category", category);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
 	}
 	
 	
-	//상품 조건 검색
-	@GetMapping("/search")
-	public void search(String keyword, String category , Model model) throws Exception{
-		log.info("상품 검색 :"+keyword+" "+category);
-		ProductVO vo = new ProductVO();
-		
-		try {
-			int pt_cd = Integer.parseInt(keyword);
-			vo.setPt_cd(pt_cd);
-			vo.setPt_NM("");
-			int category_fk = Integer.parseInt(category);
-			vo.setCategory_fk(category_fk);
-			if(category==null) {
-				category = "0";
-			}
-		} catch (Exception e) {
-			vo.setPt_NM(keyword);
-			vo.setPt_cd(0);
-		}
-		
-		try {
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			log.info("카테고리 숫자아닌 경우");
-			return;
-		}				
-	}
+//	//상품 조건 검색
+//	@GetMapping("/search")
+//	public void search(String keyword, String category , Model model) throws Exception{
+//		log.info("상품 검색 :"+keyword+" "+category);
+//		ProductVO vo = new ProductVO();
+//		
+//		try {			
+//			int pt_cd = Integer.parseInt(keyword);
+//			vo.setPt_cd(pt_cd);
+//			vo.setPt_NM("");
+//			int category_fk = Integer.parseInt(category);
+//			vo.setCategory_fk(category_fk);
+//			if(category==null) {
+//				category = "0";
+//			}
+//			if(keyword==null) {
+//				keyword = "";
+//			}
+//		} catch (Exception e) {
+//			vo.setPt_NM(keyword);
+//			vo.setPt_cd(0);
+//		}
+//		
+//		try {
+//			
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			log.info("카테고리 숫자아닌 경우");
+//			return;
+//		}				
+//	}
 	
 	
 	
@@ -136,13 +120,14 @@ public class StandartizeController {
 		log.info("상품 삽입"+vo);	
 		Boolean result=null;
 		ProductVO vo_null = new ProductVO();
+		Criteria cri_null = new Criteria();
 		vo.setSearch_category_fk("");
 		vo.setSearch_pt_cd("");
 		vo.setPt_NM("");;
 		try {
 			result=service.insert_pt(vo);
 			log.info("삽입결과 : "+result);
-			model.addAttribute("list",service.getList(vo_null));
+			//model.addAttribute("list",service.getList(cri_null,vo_null));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

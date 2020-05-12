@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.MainViewMapper">
-
-
-
 <select id="chart1" resultType="com.spring.domain.MainVO">
 select substr(order_pk, 5,2) as month, 
 sum(supply_price) as chart1_supply

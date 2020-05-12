@@ -196,30 +196,17 @@
                     <th style="padding: .4rem;">센터</th>
                     <th style="padding: .4rem;">담당MA</th>
                   </tr>
-				  <c:forEach var="vo" items="${list_c}">	
-<<<<<<< HEAD
-                  <tr>
-                    <td>${vo.rn}</td>
-                    <td><a href="#">${vo.customer_cd}</a></td>
-                    <td>${vo.pre_NM}</td>
-                    <td>${vo.customer_rcd}</td>
-                    <td>${vo.customer_NM}</td>
-                    <td>${vo.address}</td>
-                    <td>${vo.center_FK}</td>
-                    <td>${vo.emp_NM}</td>
-=======
+				  <c:forEach var="vo" items="${list_c}">	                  
                  <tr onclick="javascript:clickTrEvent(this)"
 								onmouseover="javascript:changeTrColor(this, '#FFFFFF', '#F4FFFD')">
-                     <td style="padding: .4rem;">1</td>
+                     <td style="padding: .4rem;">${vo.rn}</td>
                      <td style="padding: .4rem;">${vo.customer_cd}</td>
                      <td style="padding: .4rem;">${vo.pre_NM}</td>
                      <td style="padding: .4rem;">${vo.customer_rcd}</td>
                      <td style="padding: .4rem;">${vo.customer_NM}</td>
                      <td style="padding: .4rem;">${vo.address}</td>
                      <td style="padding: .4rem;">${vo.center_FK}</td>
-                     <td style="padding: .4rem;">${vo.emp_NM}</td>
->>>>>>> branch 'master' of https://github.com/derlung/b2bproject.git
-                  </tr>
+                     <td style="padding: .4rem;">${vo.emp_NM}</td>                 
                   </c:forEach>
                 </table>
               </div>

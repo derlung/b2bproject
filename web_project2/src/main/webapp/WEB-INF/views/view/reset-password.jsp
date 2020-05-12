@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="utf-8">
 <head>
  <meta charset="UTF-8">
 <meta name="viewport"
@@ -18,9 +19,11 @@
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="resources/dist/css/style_login.css?121" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+<!-- validation 사용자 작성 코드 삽입-->
+<script src="/resources/js/register.js"></script>
   <title>비밀번호 찾기</title>
 </head>
-
 <body class="bg-gradient-primary">
 
   <div class="container">
@@ -36,30 +39,44 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="p-5">
+                <c:if test="${!timeover}">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-2">비밀번호를 잊어버렸나요?</h1>
-                    <p class="mb-4">이메일을 입력하시면, 비밀번호를 리셋할 수 있는 페이지를 이메일로 보내드려요</p>
+                    <h1 class="h4 text-gray-900 mb-2">비밀번호 변경</h1>
                   </div>
-                  <form class="user" action="/mailSender">
+                  <form id="pw_detail" class="user" action="/reset_pw" method="POST">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email" required>
-                      <input type="hidden" id="u" name="u" value='<%=request.getParameter("u")%>'> 
+                      <input type="text" class="form-control form-control-user" id="id" name ="id" placeholder="사용자 아이디 또는 코드">
+                      <small id="id" class="text-info"></small>
+                      <input type="password" class="form-control form-control-user" id="pw" name ="pw" placeholder="암호 입력">
+                      <small id="pw" class="text-info"></small>
+                      <input type="password" class="form-control form-control-user" id="pw_confirm" name ="pw_confirm" placeholder="암호 재입력">
+                      <small id="pw_confirm" class="text-info"></small>
+                      <input type="hidden" name="key"  value='<%=request.getParameter("key") %>'>
+                      <input type="hidden" name="group_GB"  value='<%=request.getParameter("u")%>'>
                     </div>
                     <button type="submit"  class="btn btn-primary btn-user btn-block">
-                   				   이메일 인증
-                   				   </button>
+                   				   암호변경
+                    </button>
                   </form>
                   <hr>
                   <div class="text-center">
-                  <p class="mb-4">이메일 인증이 어렵다면, 담당 관리자에게 문의해주세요</p>
+                  <p class="mb-4">문제 발생시, 담당 관리자에게 문의해주세요</p>
                   </div>
+                  </c:if>
+                  <c:if test="${timeover}">
+                  	<h1>요청하신 페이지를 불러 올 수 없습니다.</h1>
+                  </c:if>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
+
     </div>
+
   </div>
 </body>
+
 </html>

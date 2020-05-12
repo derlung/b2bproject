@@ -15,10 +15,10 @@ public class PriceServiceImpl implements PriceService {
 	@Autowired
 	private PriceMapper mapper;	
 	
-
 	@Override
 	public List<PriceVO> priceList() throws Exception {		
 		return mapper.priceList();
+		
 	}
 
 }

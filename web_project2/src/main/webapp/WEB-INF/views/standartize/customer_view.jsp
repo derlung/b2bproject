@@ -196,12 +196,8 @@
                     <th style="padding: .4rem;">센터</th>
                     <th style="padding: .4rem;">담당MA</th>
                   </tr>
-<<<<<<< HEAD
-				  <c:forEach var="vo" items="${list_c}">	
 
-=======
 				  <c:forEach var="vo" items="${list_c}">	                  
->>>>>>> branch 'master' of https://github.com/derlung/b2bproject.git
                  <tr onclick="javascript:clickTrEvent(this)"
 								onmouseover="javascript:changeTrColor(this, '#FFFFFF', '#F4FFFD')">
                      <td style="padding: .4rem;">${vo.rn}</td>
@@ -211,13 +207,8 @@
                      <td style="padding: .4rem;">${vo.customer_NM}</td>
                      <td style="padding: .4rem;">${vo.address}</td>
                      <td style="padding: .4rem;">${vo.center_FK}</td>
-<<<<<<< HEAD
                      <td style="padding: .4rem;">${vo.emp_NM}</td>
-
                   </tr>
-=======
-                     <td style="padding: .4rem;">${vo.emp_NM}</td>                 
->>>>>>> branch 'master' of https://github.com/derlung/b2bproject.git
                   </c:forEach>
                 </table>
               </div>

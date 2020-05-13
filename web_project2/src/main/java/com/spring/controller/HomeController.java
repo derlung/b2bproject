@@ -6,9 +6,7 @@ import java.text.SimpleDateFormat;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -22,14 +20,11 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import com.spring.service.BoardService;
 import com.spring.domain.PwVO;
 import com.spring.mail.MailHandler;
 import com.spring.mail.TempKey;
@@ -73,8 +68,23 @@ public class HomeController {
 	public String main(PwVO vo,String tab) {
 		log.info("메인 페이지");
 
-		
+		try {
+			model.addAttribute("chart2", service.chart2());
+			model.addAttribute("chart1", service.chart1());
+			model.addAttribute("getBoard_Market", service2.getBoard_Market());
+			model.addAttribute("getBoard_Notice", service2.getBoard_Notice());
+			model.addAttribute("getMonthSum", service.getMonthSum());
+			model.addAttribute("getDaySum", service.getDaySum());
+			model.addAttribute("getMonthTeam", service.getMonthTeam());
+			model.addAttribute("getDayTeam", service.getDayTeam());			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
 		return "view/main";
+		
 	}
 	@RequestMapping(value = "/forgot-password", method = RequestMethod.GET)
 	public String forgotpw(Locale locale, Model model) {

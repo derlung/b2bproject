@@ -52,6 +52,11 @@ public class ProductServiceImpl implements ProductService {
 	public int totalRows(Criteria cri) throws Exception {		
 		return mapper.getTotalCount(cri);
 	}
+
+	@Override
+	public List<ProductVO> getList_category(Criteria cri) throws Exception {		
+		return mapper.getList_category(cri);
+	}
 	
 	
 }

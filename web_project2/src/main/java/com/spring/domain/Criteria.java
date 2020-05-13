@@ -18,8 +18,7 @@ public class Criteria {
 	private String category;	
 	private String type;
 
-	public String[] getTypeArr() {
-		System.out.println(type);
+	public String[] getTypeArr() {		
 		return type==null?new String[] {}:type.split(""); //비어있는 배열로 만들어 ("")을 기준으로 하나씩 잘라줘 //기준을 넣는다면, ("안에는 정규식 표현이 들어가야 함")
 	}
 

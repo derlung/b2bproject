@@ -14,5 +14,6 @@ public interface ProductService {
 	public boolean update_pt(ProductVO vo)throws Exception;
 	public boolean insert_pt(ProductVO vo)throws Exception;	
 	public int totalRows(Criteria cri) throws Exception;
+	public List<ProductVO> getList_category(Criteria cri) throws Exception;
  
 }

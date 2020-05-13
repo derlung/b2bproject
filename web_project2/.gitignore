@@ -109,7 +109,7 @@ web_project2/.classpath
 web_project2/target/m2e-wtp/web-resources/META-INF/maven/com.spring/controller/pom.properties
 .project
 web_project2/.settings/org.eclipse.wst.common.component
-
+web_project2/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
 
 
 # End of https://www.gitignore.io/api/java,eclipse,java-web,code-java

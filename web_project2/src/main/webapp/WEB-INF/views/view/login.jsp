@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="utf-8">
 <head>
  <meta charset="UTF-8">
 <meta name="viewport"
@@ -26,7 +26,6 @@
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
-
       <div class="col-xl-6 col-lg-6 col-md-6">
         <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-0">
@@ -53,14 +52,15 @@
            <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">CREDITOR LOGIN</h1>
                   </div>
-           <form action="/main" method="get">
+           <form action="/main" method="POST">
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="text" placeholder="회원 코드">
+                <input id="" class="form-control form-control-user" type="text" placeholder="회원 코드" name="id">
             </div>
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드">
+                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드" name="pw">
              </div>
-                <button class="btn btn-primary btn-user btn-block" type="submit" onclick="location.href='main.html'; return false;">협력사 로그인</button>
+                <button class="btn btn-primary btn-user btn-block" type="submit" >협력사 로그인</button>
+                <input type="hidden" name="group_GB" value="cr">
            </form>
                  <hr>
                   <div class="text-center">
@@ -71,14 +71,15 @@
            <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">CUSTOMER LOGIN</h1>
                   </div>
-             <form action="/main" method="get">
+             <form action="/main" method="POST">
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="text" placeholder="회원 코드">
+                <input id="" class="form-control form-control-user" type="text" placeholder="회원 코드" name="id">
             </div>
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드">
+                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드" name="pw">
              </div>
-                <button class="btn btn-primary btn-user btn-block" type="submit" onclick="location.href='main.html'; return false;">고객사 로그인</button>
+                <button class="btn btn-primary btn-user btn-block" type="submit" >고객사 로그인</button>
+                 <input type="hidden" name="group_GB" value="c">
            </form>
                  <hr>
                   <div class="text-center">
@@ -90,14 +91,15 @@
            <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">EMPLOYEE LOGIN</h1>
                   </div>
-                   <form action="/main" method="get">
+                   <form action="/main" method="POST">
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="text" placeholder="사원 아이디">
+                <input id="" class="form-control form-control-user" type="text" placeholder="사원 아이디" name="id">
             </div>
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드">
+                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드" name="pw">
              </div>
-                <button class="btn btn-primary btn-user btn-block" type="submit" onclick="location.href='main.html'; return false;">임직원 로그인</button>
+                <button class="btn btn-primary btn-user btn-block" type="submit" >임직원 로그인</button>
+                 <input type="hidden" name="group_GB" value="e">
            </form>
                  <hr>
                   <div class="text-center">
@@ -109,21 +111,21 @@
            <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">ADMIN LOGIN</h1>
                   </div>
-            <form action="/main" method="get">
+            <form action="/main" method="POST">
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="text" placeholder="관리자 코드">
+                <input id="" class="form-control form-control-user" type="text" placeholder="관리자 코드" name="id">
             </div>
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드">
+                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드" name="pw">
              </div>
                 <button class="btn btn-primary btn-user btn-block" type="submit" >관리자 로그인</button>
+                 <input type="hidden" name="group_GB" value="a">
            </form>
                  <hr>
                   <div class="text-center">
                     <a class="small" href="/forgot-password?u=a">비밀번호 찾기</a>
                   </div>
         </div>
-
 </div>
 </div>
 </div>
@@ -135,5 +137,4 @@
       </div>
     </div>
 </body>
-
 </html>

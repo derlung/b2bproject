@@ -321,10 +321,15 @@
                      
                     </tr>
   
-                    <tr>
-                    
-                      <td></td>
-                    </tr>
+   
+  						<c:forEach var="vo" items="${getBoard_Notice}">
+  						<tr>
+  						 <td>${vo.bno}</td>
+  						  <td>${vo.title}</td>
+  						   <td>${vo.writer}</td>
+  						     <td>${vo.regdate}</td>
+  						    </tr>
+  						 </c:forEach>
 
                   </table>
                 </div>
@@ -334,7 +339,7 @@
             <div class="main-3-1">
               <div id="main-board-1">
                 <div class="main-board-header">
-                  <a href="#" style="text-decoration: none;">알뜰장터</a>
+                 알뜰장터
                   
                 </div>
                 <div class="board-table">
@@ -344,24 +349,17 @@
                       <th>글제목</th>
                       <th>작성자</th>
                       <th>작성일</th>
-                      <th>조회수</th>
-                     
+                                       
                     </tr>
   
-                    <tr>
-                      <td>1</td>
-                      <td>닌텐도 스위치 팔아요~ </td>
-                      <td>홍길동</td>
-                      <td>2020.05.01</td>
-                      <td>321</td>
-                    </tr>
-                    <tr>     
-                      <td>2</td>
-                      <td>평창 콘도 숙박권 양도합니다. </td>
-                      <td>김미미</td>
-                      <td>2020.05.04</td>
-                      <td>151</td>
-                    </tr>
+                	<c:forEach var="vo" items="${getBoard_Market}">
+  						<tr>
+  						 <td>${vo.bno}</td>
+  						  <td>${vo.title}</td>
+  						   <td>${vo.writer}</td>
+  						     <td>${vo.regdate}</td>
+  						    </tr>
+  						 </c:forEach>
                   </table>
                 </div>
             </div>

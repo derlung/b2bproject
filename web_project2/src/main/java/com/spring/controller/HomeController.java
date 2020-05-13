@@ -67,7 +67,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	@RequestMapping(value = "/main", method = RequestMethod.POST)
 	public String main(Locale locale, Model model) {
 		log.info("메인 페이지");
 		try {

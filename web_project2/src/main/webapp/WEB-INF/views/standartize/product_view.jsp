@@ -32,8 +32,12 @@
 
 	function check2() {
 		var result = confirm("상품 입력을 저장하겠습니까?");
+		console.log(result);
 		if (result) {
-			pt_add();
+			
+			let form = $("#pt_add");			
+			form.submit();
+			$(".add_edit").hide();
 		} else {
 			return;
 		}
@@ -125,11 +129,7 @@
 			data : $('#pt_add').serialize(),
 			success : function(data) {
 				console.log("서버 " + data);
-				/* if(data===true){
-					alert("성공적으로 변경되었습니다.");	
-				}else{
-					alert("변경이 실패하였습니다.");
-				} */
+				
 			},
 			error : function(data) {
 				alert("오류");
@@ -163,6 +163,8 @@
 				searchForm.find("input[name='type']").val(type);
 				console.log(type);
 			}
+			//검색 후 모달 창 닫기
+			
 			
 			
 			searchForm.submit();
@@ -263,7 +265,7 @@
 		<a> 상품관리</a>
 	</div>
 	<div class="button">
-		<button type="button" onclick="return check();">저장</button>
+		<button type="button" onclick="return check();">수정</button>
 		<button type="reset" onclick="javascript:update_edit_close();">닫기</button>
 	</div>
 	<form id="pt_update" action="update_product" method="post">
@@ -321,7 +323,7 @@
 		<span class="material-icons"> add_box </span> <a> 상품추가</a>
 	</div>
 	<div class="button">
-		<button type="button" onclick="return check2();">저장</button>
+		<button type="button" onclick="check2();">저장</button>
 		<button type="reset" onclick="javascript:add_edit_close()">닫기</button>
 	</div>
 	<form id="pt_add" action="add_product" method="post">

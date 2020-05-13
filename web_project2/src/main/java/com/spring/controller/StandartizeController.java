@@ -43,14 +43,15 @@ public class StandartizeController {
 	@GetMapping(value="product_view")
 	public void product_view(@ModelAttribute("cri") Criteria cri,Model model) {
 		log.info("상품 페이지 "+cri);
-		
+		log.info("category"+cri.getCategory());	
 		
 		try {
-			model.addAttribute("list",service.getList(cri));
 			
+			model.addAttribute("list",service.getList(cri));			
 			int totalRows=service.totalRows(cri);
 			log.info("전체 갯수 "+totalRows);
 			model.addAttribute("pageVO", new PageVO(cri, totalRows));
+			
 			model.addAttribute("cate",service.getCate());
 			model.addAttribute("origin",service.getOrigin());
 
@@ -115,23 +116,39 @@ public class StandartizeController {
 		}			
 	}
 	
+	
 	@PostMapping(value="add_product")
-	public ResponseEntity<Boolean> add_product(ProductVO vo,Model model) {		
+	public String add_product(ProductVO vo,RedirectAttributes rttr) {		
 		log.info("상품 삽입"+vo);	
-		Boolean result=null;
-		ProductVO vo_null = new ProductVO();
-		Criteria cri_null = new Criteria();
-		vo.setSearch_category_fk("");
-		vo.setSearch_pt_cd("");
-		vo.setPt_NM("");;
+//		Boolean result=null;
+//		ProductVO vo_null = new ProductVO();
+////		Criteria cri_null = new Criteria();
+//		vo.setCategory_fk(0);
+//		vo.setPt_cd(0);
+//		vo.setPt_NM("");
+//		try {
+//			result=service.insert_pt(vo);
+//			log.info("삽입결과 : "+result);
+//			model.addAttribute("list",service.getList(cri,vo_null));
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
+		
+		boolean result;
 		try {
-			result=service.insert_pt(vo);
-			log.info("삽입결과 : "+result);
-			//model.addAttribute("list",service.getList(cri_null,vo_null));
-		} catch (Exception e) {
+			result = service.insert_pt(vo);
+			//model.addAttribute("list",service.getList_category(cri));
+		} catch (Exception e) {			
 			e.printStackTrace();
-		}
-		return new ResponseEntity<Boolean>(result,HttpStatus.OK);		
+		}	
+		
+		
+		
+		//cri.setCategory(String.valueOf(vo.getCategory_fk()));
+		rttr.addAttribute("category", vo.getCategory_fk());
+		rttr.addAttribute("type", "C");
+		return "redirect:product_view";
 	}
 	
 	@PostMapping(value="update_product")

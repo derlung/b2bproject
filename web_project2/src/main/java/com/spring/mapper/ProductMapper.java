@@ -16,5 +16,6 @@ public interface ProductMapper {
 	public int update_pt(ProductVO vo);
 	public int insert_pt(ProductVO vo);
 	public int getTotalCount(Criteria cri);
+	public List<ProductVO>getList_category(Criteria cri);
 	
 }

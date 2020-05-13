@@ -6,7 +6,9 @@ import java.text.SimpleDateFormat;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -20,9 +22,11 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.spring.service.BoardService;
 import com.spring.domain.PwVO;
@@ -48,6 +52,9 @@ public class HomeController {
 	public MainViewService service;
 	
 	@Autowired
+	public BoardService service2;
+	
+	@Autowired
 	private PwService service_pw;
 	
 	private PasswordEncoder passwordEncoder;
@@ -65,9 +72,24 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
-	public String main(PwVO vo,String tab) {
+	public String main(PwVO vo,Model model) {
 		log.info("메인 페이지");
-
+		passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();	
+		try {
+			String pw_db = service_pw.login(vo);
+			if(pw_db !=null) {
+			if(!passwordEncoder.matches(vo.getPw(),service_pw.login(vo))){
+				log.info("실패1");
+				return "redirect:/main";
+			}else {
+				log.info("성공");
+			}
+			}
+		} catch (Exception e1) {
+			
+			e1.printStackTrace();
+		}
+		
 		try {
 			model.addAttribute("chart2", service.chart2());
 			model.addAttribute("chart1", service.chart1());

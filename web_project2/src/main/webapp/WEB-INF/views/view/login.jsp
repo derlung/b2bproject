@@ -79,7 +79,7 @@
                 <input id="" class="form-control form-control-user" type="password" placeholder="패스워드" name="pw">
              </div>
                 <button class="btn btn-primary btn-user btn-block" type="submit" >고객사 로그인</button>
-                 <input type="hidden" name="group_GB" value="c">
+                 <input type="hidden" name="group_GB" value="cu">
            </form>
                  <hr>
                   <div class="text-center">

@@ -58,4 +58,19 @@
 	<delete id="delete_row">
 		delete from password_email_auth where key=#{key}
 	</delete>
+	
+		
+	<select  id="login" resultType="String">
+		select password 
+		<if test="group_GB=='e'.toString()">
+			 from emp_tb where emp_cd =
+		</if>
+		<if test="group_GB=='cr'.toString()">
+			 from creditor_tb where creditor_cd =
+		</if>
+		<if test="group_GB=='cu'.toString()">
+			from customer_tb where customer_cd =
+		</if>
+		#{id} 
+	</select>
 </mapper>

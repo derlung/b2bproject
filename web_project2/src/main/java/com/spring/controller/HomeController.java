@@ -22,6 +22,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,7 +63,6 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("로그인 페이지");
-
 		
 		return "view/login";
 	}
@@ -72,7 +72,7 @@ public class HomeController {
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
 	public String main(PwVO vo,String tab) {
 		log.info("메인 페이지");
-		log.info(vo.toString()+"sdsd1234568"+tab);
+
 		
 		return "view/main";
 	}
@@ -85,6 +85,7 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/mailSender") 
+	@PostMapping
 	public String mailSender(@RequestParam("email") String email,@RequestParam("u") String u) throws AddressException, MessagingException, UnsupportedEncodingException {
 		
 		String key = new TempKey().getKey(50, false);

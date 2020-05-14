@@ -20,7 +20,12 @@
 	<link rel="stylesheet" href="resources/dist/css/style_login.css?121" />
   <title>비밀번호 찾기</title>
 </head>
-
+<script>
+var result = '${result}';
+if(result==="fail"){
+	alert("일치하는 계정이 없습니다.");
+}
+</script>
 <body class="bg-gradient-primary">
 
   <div class="container">

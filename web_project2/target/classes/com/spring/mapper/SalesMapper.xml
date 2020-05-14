@@ -2,21 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.SalesMapper">
 
-<!-- 판매상품 리스트 -->
-<select id="salesList" resultType="com.spring.domain.SalesVO">
-	select center_fk,pt_fk,pt_nm,unit,origin_nm,storage_nm,tax_nm,sale_cost,exp_D,exp_T
-	from productcon_tb left join 
-		(select origin_nm,unit,pt_cd,pt_nm,storage_nm,tax_nm,cate_nm from product_tb
-			left join storage_tb on storage_fk=storage_cd
-			left join tax_tb on tax_fk=tax_cd
-			left join category_tb on cate_cd=category_fk
-			left join origin_tb on origin_cd=origin_fk) on pt_fk=pt_cd
-</select>
+	<!-- 판매상품 리스트 -->
+	<select id="salesList" resultType="com.spring.domain.SalesVO">
+		select
+		center_fk,pt_fk,pt_nm,unit,origin_nm,storage_nm,tax_nm,sale_cost,exp_D,exp_T
+		from productcon_tb left join
+		(select
+		origin_nm,unit,pt_cd,pt_nm,storage_nm,tax_nm,cate_nm from product_tb
+		left join storage_tb on storage_fk=storage_cd
+		left join tax_tb on
+		tax_fk=tax_cd
+		left join category_tb on cate_cd=category_fk
+		left join
+		origin_tb on origin_cd=origin_fk) on pt_fk=pt_cd
+	</select>
 
-<!-- 판매처 리스트 -->
-<select id="customerList" resultType="com.spring.domain.CustomerVO">
-	select /*+INDEX_DESC(customer_tb pk_customer_tb)*/rownum rn, customer_cd, pre_nm, customer_rcd, customer_nm, c.address, center_fk, emp_nm from customer_tb c
-	left join emp_tb e on c.emp_fk = e.emp_cd
-</select>
- 
+	<!-- 판매처 리스트 -->
+	<select id="customerList"
+		resultType="com.spring.domain.CustomerVO">
+		select /*+INDEX_DESC(customer_tb pk_customer_tb)*/rownum
+		rn, customer_cd,
+		pre_nm, customer_rcd, customer_nm, c.address,
+		center_fk, emp_nm from
+		customer_tb c
+		left join emp_tb e on c.emp_fk =
+		e.emp_cd
+	</select>
+
+	<!-- 판매처 검색 -->
+	<select id="customerSearch"
+		resultType="com.spring.domain.CustomerVO">
+		select customer_cd , customer_NM,pre_NM,Address,center_FK
+		from
+		customer_tb
+		where
+		<if test="criteria=='customer_NM'">
+			customer_nm Like '%'||#{keyword}||'%'
+		</if>
+		<if test="criteria=='customer_cd'">
+			customer_cd Like '%'||#{keyword}||'%'
+		</if>
+	</select>
+
+	<select id="center_ptList"
+		resultType="com.spring.domain.Center_ptVO">
+		select
+		center_fk,pt_cd,pt_NM,unit,origin_NM,storage_NM,tax_NM,sale_cost,p.exp_d
+		exp_d,exp_t from productcon_tb p
+		left join (
+		select * from product_tb
+		left join origin_tb on origin_fk = origin_cd
+		left join storage_tb on storage_fk = storage_cd
+		left join tax_tb on tax_fk = tax_cd
+		)on pt_fk = pt_cd
+		where center_fk =(select center_fk from customer_tb where customer_cd =
+		#{customer_cd})
+	</select>
 </mapper>

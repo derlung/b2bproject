@@ -20,6 +20,12 @@
 	<link rel="stylesheet" href="resources/dist/css/style_login.css?121" />
   <title>Login</title>
 </head>
+<script>
+	var login = '${login}';
+	if(login==="fail"){
+		alert("로그인에 실패하였습니다 계정과 비밀번호를 다시 확인해주세요");
+	}
+</script>
 <body class="bg-gradient-primary">
 
   <div class="container">
@@ -54,10 +60,10 @@
                   </div>
            <form action="/main" method="POST">
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="text" placeholder="회원 코드" name="id">
+                <input id="" class="form-control form-control-user" type="text" placeholder="회원 코드" name="id" required>
             </div>
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드" name="pw">
+                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드" name="pw" required>
              </div>
                 <button class="btn btn-primary btn-user btn-block" type="submit" >협력사 로그인</button>
                 <input type="hidden" name="group_GB" value="cr">
@@ -73,10 +79,10 @@
                   </div>
              <form action="/main" method="POST">
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="text" placeholder="회원 코드" name="id">
+                <input id="" class="form-control form-control-user" type="text" placeholder="회원 코드" name="id" required>
             </div>
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드" name="pw">
+                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드" name="pw" required>
              </div>
                 <button class="btn btn-primary btn-user btn-block" type="submit" >고객사 로그인</button>
                  <input type="hidden" name="group_GB" value="cu">
@@ -93,10 +99,10 @@
                   </div>
                    <form action="/main" method="POST">
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="text" placeholder="사원 아이디" name="id">
+                <input id="" class="form-control form-control-user" type="text" placeholder="사원 아이디" name="id" required>
             </div>
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드" name="pw">
+                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드" name="pw" required>
              </div>
                 <button class="btn btn-primary btn-user btn-block" type="submit" >임직원 로그인</button>
                  <input type="hidden" name="group_GB" value="e">
@@ -113,10 +119,10 @@
                   </div>
             <form action="/main" method="POST">
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="text" placeholder="관리자 코드" name="id">
+                <input id="" class="form-control form-control-user" type="text" placeholder="관리자 코드" name="id" required>
             </div>
             <div class="form-group">
-                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드" name="pw">
+                <input id="" class="form-control form-control-user" type="password" placeholder="패스워드" name="pw" required>
              </div>
                 <button class="btn btn-primary btn-user btn-block" type="submit" >관리자 로그인</button>
                  <input type="hidden" name="group_GB" value="a">

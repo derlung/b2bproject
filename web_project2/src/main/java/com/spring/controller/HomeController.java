@@ -80,16 +80,19 @@ public class HomeController {
 			if(pw_db !=null) {
 			if(!passwordEncoder.matches(vo.getPw(),service_pw.login(vo))){
 				log.info("실패1");
-				return "redirect:/main";
+				model.addAttribute("login", "fail");
+				return "view/login";
 			}else {
+				model.addAttribute("login","success");
 				log.info("성공");
 			}
 			}
 		} catch (Exception e1) {
 			
 			e1.printStackTrace();
+			model.addAttribute("login", "fail");
+			return "view/login";
 		}
-		
 		try {
 			model.addAttribute("chart2", service.chart2());
 			model.addAttribute("chart1", service.chart1());
@@ -118,7 +121,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/mailSender") 
 	@PostMapping
-	public String mailSender(@RequestParam("email") String email,@RequestParam("u") String u) throws AddressException, MessagingException, UnsupportedEncodingException {
+	public String mailSender(@RequestParam("email") String email,@RequestParam("u") String u,Model model) throws AddressException, MessagingException, UnsupportedEncodingException {
 		
 		String key = new TempKey().getKey(50, false);
 		//이메일 인증 DB 추가
@@ -208,10 +211,13 @@ public class HomeController {
 				sendMail.send();
 			}else {
 				//실패시
+				model.addAttribute("result","fail");
 				return "view/forgot-password";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			model.addAttribute("result","fail");
+			return "view/forgot-password";
 		}
 		
 		return "view/login";

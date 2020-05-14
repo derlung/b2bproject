@@ -6,7 +6,7 @@ import lombok.Data;
 public class ProductVO {
 	
 	private int rn;    //no
-	private int pt_cd;  //상품코드
+	private long pt_cd;  //상품코드
 	private String pt_NM; //상품명
 	private String unit;  //단위
 	private String tax_NM; //면과세 명

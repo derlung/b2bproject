@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.BoardMapper">
+
+
+
+
+
+<!-- 메인: 알뜰시장 (상위5개 게시물만 출력) -->
+<select id="getBoard_Market" resultType="com.spring.domain.BoardVO">
+select bno, title, writer, regdate from board_market 
+where bno between (select max(bno)-4 from board_market) and 
+(select max(bno) from board_market)
+order by bno desc
+</select>
+
+
+
+<!--  리스트 출력 -->
+<select id="board_Market_List" resultType="com.spring.domain.BoardVO">
+select * from board_market
+</select>
+
+
+
+<!--  게시글읽기 -->
+<select id="board_market_read" resultType="com.spring.domain.BoardVO">
+select * from board_market where bno=#{bno}
+</select>
+
+
+
+
+
+
+
+<!-- 메인: 공지사항 (상위5개 게시물만 출력) -->
+<select id="getBoard_Notice" resultType="com.spring.domain.BoardVO">
+select bno, title, writer, regdate from board_notice 
+where bno between (select max(bno)-4 from board_notice) and 
+(select max(bno) from board_notice)
+order by bno desc
+</select>
+
+
+
+<!--  공지사항 리스트 출력 -->
+<select id="board_Notice_List" resultType="com.spring.domain.BoardVO">
+select * from board_notice
+</select>
+
+
+<!--  게시글읽기 -->
+<select id="board_Notice_read" resultType="com.spring.domain.BoardVO">
+select * from board_notice where bno=#{bno}
+</select>
+
+
+</mapper>

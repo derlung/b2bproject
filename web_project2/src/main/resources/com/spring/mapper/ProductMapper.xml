@@ -61,36 +61,30 @@
 		<foreach collection="typeArr" item='type'>
 			<trim prefix="OR">
 				<choose>
-					<when test="type=='N'.toString()">
+					<when test="type=='S'.toString()">
 						pt_cd like '%'||#{keyword}||'%'
 					</when>					
-					<when test="type=='S'.toString()">
+					<when test="type=='N'.toString()">
 						pt_NM like '%'||#{keyword}||'%'
 					</when>					
 					<when test="type=='C'.toString()">
 						category_fk like '%'||#{category}||'%'						
-					</when>
-				</choose>
+					</when>												
+				</choose>				
 			</trim>
 		</foreach>		
 	</trim>	
 </sql>	
-
-
-
-
-
-
 
 <update id="update_pt">
 	update product_tb set pt_nm= #{pt_NM},
 	category_fk=#{category_fk},
 	unit=#{unit},
 	tax_fk=#{tax_cd},
-	storage_fk=(select storage_cd from storage_tb where storage_nm=#{storage_NM}),
-	origin_fk=(select origin_cd from origin_tb where origin_nm=#{origin_NM}),
+	storage_fk=#{storage_cd},
+	origin_fk=#{origin_CD},
 	exp_D=#{exp_D}
-	 where pt_cd=#{pt_cd}
+	where pt_cd=#{pt_cd}
 </update>
 
 
@@ -117,27 +111,6 @@
 	
 	,#{pt_NM},#{unit},#{tax_cd},#{origin_CD},#{storage_cd},#{exp_D},#{category_fk})
 </insert>
-
-<!-- <select id="getList_category" resultType="com.spring.domain.ProductVO">
-<![CDATA[
-	select * 
-	from(
-		select rownum rn,pt_cd,pt_NM,unit,tax_NM,origin_NM,storage_NM,exp_D,category_fk,cate_NM,emp_fk,emp_NM
-		from(select pt_cd,pt_NM,unit,tax_NM,origin_NM,storage_NM,exp_D,category_fk,cate_NM,emp_fk,emp_NM
-			from PRODUCT_TB p left join tax_tb t on p.tax_fk =t.tax_cd
-			left join origin_tb o on p.origin_fk = o.origin_cd
-			left join storage_tb s on p.storage_fk = s.storage_cd
-			left join category_tb c on p.category_fk = c.cate_cd
-			left join emp_tb e on p.emp_fk = e.emp_cd order by pt_cd desc)	
-		where 
-	]]>	
-		<include refid="criteria"></include>
-	<![CDATA[   
-    	rownum <= #{pageNum}*#{amount})
-    	where rn> (#{pageNum}-1)*#{amount} and category like '%'||#{category}||'%'
-     ]]>		
-	    	
-</select> -->
 
 <select id="getOrigin" resultType="com.spring.domain.OriginVO">
 	select origin_cd,origin_NM from origin_tb

@@ -8,4 +8,5 @@ public interface PwMapper {
 	public int reset_pw(PwVO vo);
 	public String check_id(PwVO vo);
 	public int delete_row(String key);
+	public String login(PwVO vo);
 }

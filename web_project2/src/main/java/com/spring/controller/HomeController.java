@@ -6,7 +6,9 @@ import java.text.SimpleDateFormat;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -20,9 +22,11 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.spring.service.BoardService;
 import com.spring.domain.PwVO;
@@ -50,6 +54,7 @@ public class HomeController {
 	@Autowired
 	public BoardService service2;
 	
+	@Autowired
 	private PwService service_pw;
 	
 	private PasswordEncoder passwordEncoder;
@@ -60,7 +65,6 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("로그인 페이지");
-
 		
 		return "view/login";
 	}
@@ -68,8 +72,28 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
+<<<<<<< HEAD
 	public String main(Locale locale, Model model) {
+=======
+	public String main(PwVO vo,Model model) {
+>>>>>>> refs/remotes/origin/master
 		log.info("메인 페이지");
+		passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();	
+		try {
+			String pw_db = service_pw.login(vo);
+			if(pw_db !=null) {
+			if(!passwordEncoder.matches(vo.getPw(),service_pw.login(vo))){
+				log.info("실패1");
+				return "redirect:/main";
+			}else {
+				log.info("성공");
+			}
+			}
+		} catch (Exception e1) {
+			
+			e1.printStackTrace();
+		}
+		
 		try {
 			model.addAttribute("chart2", service.chart2());
 			model.addAttribute("chart1", service.chart1());
@@ -93,6 +117,108 @@ public class HomeController {
 		log.info("비밀번호찾기 페이지");
 		
 		return "view/forgot-password";
+	}
+	
+	
+	@RequestMapping(value = "/mailSender") 
+	@PostMapping
+	public String mailSender(@RequestParam("email") String email,@RequestParam("u") String u) throws AddressException, MessagingException, UnsupportedEncodingException {
+		
+		String key = new TempKey().getKey(50, false);
+		//이메일 인증 DB 추가
+		PwVO vo = new PwVO();
+		vo.setEmail(email);
+		vo.setKey(key);
+		vo.setGroup_GB(u);
+		try {
+			if(service_pw.add_pw(vo)) {
+				MailHandler sendMail = new MailHandler(mailSender);
+				sendMail.setSubject("[비밀번호 변경 이메일 인증]"); // 메일제목
+				sendMail.setText( // 메일내용
+						" <div" + 
+						"      style=\" " + 
+						"        width: 600px; " + 
+						"        height: 550px; " + 
+						"        border: 1px solid #cacaca; " + 
+						"        margin: 0 auto; " + 
+						"      \" " + 
+						"    > " + 
+						"      <div " + 
+						"        style=\" " + 
+						"          width: calc(100%-3px); " + 
+						"          background-color: #007bb5; " + 
+						"          color: white; " + 
+						"          padding: 5px; " + 
+						"          font-size: 20px; " + 
+						"          font-weight: bold; " + 
+						"        \" " + 
+						"      ></div> " + 
+						"      <div " + 
+						"        style=\" " + 
+						"          color: #007bb5; " + 
+						"          font-family: Yj TEUNTEUN; " + 
+						"          font-size: 50px; " + 
+						"          text-align: center; " + 
+						"        \" " + 
+						"      > " + 
+						"        <p>(주)삼정물산</p> " + 
+						"    " + 
+						"      </div> " + 
+						"      <div style=\"padding: 50px;\"> " + 
+						"        <div style=\"font-size: 15px; font-weight: bold;\"> " + 
+						"          비밀번호를 변경해주세요.<br /><br /> " + 
+						"        </div> " + 
+						"        <div style=\"font-size: 14px;\"> " + 
+						"          본 메일은 비밀번호 변경을 위해 발송되는 메일입니다. 본인이 요청한 변경 " + 
+						"          사항이 아니라면 개인정보 보호를 위해 비밀번호를 재변경해주세요 " + 
+						"          <br> " + 
+						"            비밀번호를 다시 설정하려면 '비밀번호 변경' 버튼을 클릭해주세요. " + 
+						"          </div> " + 
+						"          <br> " + 
+						"          <hr> " + 
+						"        </div>      " + 
+						"      <div style=\"text-align: center;\"> " + 
+						"              <a   href='http://localhost:8080/reset-password?u="+u+
+						"&key=" + key+"' target='_blenk'" + 
+						"                style=\"                                     " + 
+						"                  background-color: #007bb5; " + 
+						"                  border-radius: 5px;                   " + 	
+						"                  cursor: pointer; " + 
+						"                  color: #ffffff; " + 
+						"                  font-family: Arial; " + 
+						"                  font-size: 20px; " + 
+						"                  padding: 12px 37px; " + 
+						"                  text-decoration: none; " + 
+						"                  padding: 20px 45px;\"                 " + 
+						"                                " + 
+						"                >비밀번호 변경</a> " + 
+						"            </div> " + 
+						"            <br> " + 
+						"            <br> " + 
+						"            <br> " + 
+						"    " + 
+						"             " + 
+						"                <div style=\"text-align: center; font-size: 13px; color: #9c9c9c;\"> " + 
+						"                  본 메일은 발신 전용으로 회신이 불가합니다. 문의사항은 담당자에게 연락 바랍니다.<br> " + 
+						"                  Copyright © 2020 Distruition All rights reserved. " + 
+						"                </div> " + 
+						" " + 
+						"      </div> " + 
+						"    </div> " 	);
+				
+		
+				sendMail.setFrom("demian1722@naver.com", "관리자"); // 보낸이
+				sendMail.setTo(email); // 받는이
+				sendMail.send();
+			}else {
+				//실패시
+				return "view/forgot-password";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "view/login";
 	}
 	
 	@RequestMapping(value = "/reset-password", method = RequestMethod.GET)
@@ -129,43 +255,12 @@ public class HomeController {
 	
 	}
 	
-	@RequestMapping(value = "/mailSender") 
-	public String mailSender(@RequestParam("email") String email,@RequestParam("u") String u) throws AddressException, MessagingException, UnsupportedEncodingException {
-		
-		String key = new TempKey().getKey(50, false);
-		//이메일 인증 DB 추가
-		PwVO vo = new PwVO();
-		vo.setEmail(email);
-		vo.setKey(key);
-		vo.setGroup_GB(u);
-		try {
-			if(service_pw.add_pw(vo)) {
-				MailHandler sendMail = new MailHandler(mailSender);
-				sendMail.setSubject("[비밀번호 변경 이메일 인증]"); // 메일제목
-				sendMail.setText( // 메일내용
-						"<div>"
-						+ "<h1>메일인증</h1>" +
-						"<a href='http://localhost:8080/reset-password?u=" +u+
-						"&key=" + key+
-						"' target='_blenk'>이메일 인증 확인</a></div>");
-				sendMail.setFrom("demian1722@naver.com", "관리자"); // 보낸이
-				sendMail.setTo(email); // 받는이
-				sendMail.send();
-			}else {
-				//실패시
-				return "view/forgot-password";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return "view/login";
-	}
-	
 	@RequestMapping(value = "/reset_pw", method = RequestMethod.POST)
-	public String reset_pw(PwVO vo, Model model) {
+	@ResponseBody
+	public Map<String, String> reset_pw( PwVO vo) {
 		log.info("비밀번호 변경");
 		passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		Map<String,String> map = new HashMap<String, String>();
 		vo.setPw(passwordEncoder.encode(vo.getPw()));
 		//키값과 id 일치하는지 확인
 		try {
@@ -175,28 +270,29 @@ public class HomeController {
 					
 					if(service_pw.reset_pw(vo)) {
 						//update 성공시 키값 행 삭제
-						model.addAttribute("result","success");
+						map.put("result","success");
 						if(service_pw.delete_row(vo.getKey())) {
 							//삭제 성공
-							return "redirect:/reset_pw";
+							map.put("msg","비밀번호를 성공적으로 변경하였습니다");
+							return map;
 						}
 					}else {
 						//update 실패했을때 (해당 사용자가 존재하지 않을때?)
-						model.addAttribute("msg","존재하지 않는 사용자입니다. 관리자에게 문의해주세요");
+						map.put("msg","존재하지 않는 사용자입니다. 관리자에게 문의해주세요");
 					}
 				}else {
 					//아이디가 해당 키값에 해당하는 행의 아이디와 다를때
-					model.addAttribute("msg","변경하려는 아이디가 다릅니다. 다시 입력해주세요");
+					map.put("msg","변경하려는 아이디가 다릅니다. 다시 입력해주세요");
 				}
 			}else {
 				//키값에 해당하는 행이 없을 때
-				model.addAttribute("msg","잘못된 키값입니다. 다시 시도해주세요");
+				map.put("msg","잘못된 키값입니다. 다시 시도해주세요");
 			}
 		} catch (Exception e) {
 		
 			e.printStackTrace();
 		}
-		model.addAttribute("result","fail");
-		return "redirect:/reset_pw";
+		map.put("result","fail");
+		return map;
 	}
 }

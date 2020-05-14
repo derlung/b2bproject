@@ -293,7 +293,7 @@
 				<td>고객코드</td>
 				<td colspan="2">
 				<input type="text" id="customer_cd_a"
-					style="background-color: #e0e0e0;width: 100% " name="customer_cd" readonly />
+					style="background-color: #e0e0e0;width: 100%; border: 0px;" name="customer_cd" />
 					${vo.customer_cd}</td>
 					
 					

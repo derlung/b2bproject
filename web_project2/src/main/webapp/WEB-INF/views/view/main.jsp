@@ -20,6 +20,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"type="text/javascript">
   </script>
    <style>
+   
+   body{
+   background-color: #fbfbfb;
+   }
       .main-1 {
         width: 100%;
         height: 100%;
@@ -36,7 +40,7 @@
         height: 100%;
         width: 25%;
         margin: 10px;
-        border: 5px solid #cacaca;
+        border: 5px solid #bcbcbc;
         border-left: 10px solid #0083db !important;
         padding-bottom:20px;
         padding-top: 20px;
@@ -45,7 +49,7 @@
         flex-direction: column;
         min-width: 0;
         word-wrap: break-word;
-        background-color: #fff;
+        background-color: #ffff;
         background-clip: border-box;
         border: 1px solid #e3e6f0;
         border-radius: 0.35rem; 
@@ -70,6 +74,7 @@
         font-weight: bolder;
         color: #4e73df;
         padding-left: 20px;
+        background-color:white;
       }
 
 
@@ -109,18 +114,19 @@
         width: 60%;
         padding: 5 px;
         margin: 10px;
-        border: 1px solid #cacaca;
+        border: 1px solid #bcbcbc;
         border-radius: 0.35rem; 
-        border-top: 0.25em solid #efefef  !important;
+       
+        border-top: 10px solid #0083db !important;
       }
 
       .main-2-2{
         width: 40%;
         padding: 5 px;
         margin: 10px;
-        border: 1px solid #cacaca;
-        border-radius: 0.35rem; 
-        border-top: 0.25em solid #efefef  !important;
+        border: 1px solid #bcbcbc;
+        border-radius: 0.35rem;         
+         border-top: 10px solid #0083db !important;
       }
       
    
@@ -128,9 +134,10 @@
       .chart-header{
         font-family: "Nanum Gothic", sans-serif;
         font-size: 15px;
-        color: #4e4e4e;
+        color: #4e73df;
         font-weight: 600;
-        background-color: #efefef ;
+       background-color:#ffffff;
+        
         padding: 10px;
         text-align: left;
       }
@@ -151,17 +158,20 @@
         padding: 5 px;
         margin: 10px;
         border: 1px solid #cacaca;
+         border-top: 10px solid #0083db !important;
          border-top-left-radius: 0.35rem; 
         border-top-right-radius: 0.35rem; 
+       
       }
 
 
       .main-board-header{
         font-family: "Nanum Gothic", sans-serif;
         font-size: 15px;
-        color: #4e4e4e;
+        color: #4e73df;
         font-weight: 600;
-        background-color: #efefef ;
+       background-color:#ffffff;
+
         padding: 10px;
         text-align: left;
       }
@@ -180,6 +190,7 @@
  
   </head>
   <body>
+  
        <section>
         <!--본문영역-->
         <article class="contents">
@@ -190,6 +201,7 @@
                    <div class="main-card-left">
                       <div class="card-header">
                         일 매출 (팀별)
+                       
                       </div>
                      
                       <div class="card-content">
@@ -280,6 +292,7 @@
               	<div class="main-2-1">
                   <div class="chart-header">
                     월 매출 현황
+                    <hr />
                   </div>
 
                   <div id="chart1">         
@@ -292,6 +305,7 @@
                 <div class="main-2-2">
                	 <div class="chart-header">
                     팀별 매출 현황
+                      <hr />
                 </div> 
                 <div id="chart2">
                     <jsp:include page="../main_view/chart2.jsp"></jsp:include>

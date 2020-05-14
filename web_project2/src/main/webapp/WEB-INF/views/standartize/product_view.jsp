@@ -188,7 +188,7 @@
 						<span class="material-icons"> search </span> 조회
 					</button>
 					<button type="button" onclick="">
-						<span class="material-icons"> add </span> Excel
+						<span class="material-icons"> view_list </span> Excel
 					</button>
 				</div>
 				<div class="formbox">
@@ -262,11 +262,14 @@
 <!-- -------------------------------------      업데이트 창 ------------------------------------------------>
 <div class="edit_row update_edit">
 	<div class="contents_header">
+	<span class="material-icons"> done_outline </span>
 		<a> 상품관리</a>
 	</div>
 	<div class="button">
-		<button type="button" onclick="return check();">수정</button>
-		<button type="reset" onclick="javascript:update_edit_close();">닫기</button>
+		<button type="button" onclick="return check();">
+		<span class="material-icons"> cached </span> 수정</button>
+		<button type="reset" onclick="javascript:update_edit_close();">
+		<span class="material-icons"> highlight_off </span> 닫기</button>
 	</div>
 	<form id="pt_update" action="update_product" method="post">
 		<!--   -->
@@ -274,10 +277,10 @@
 			<tr>
 				<td>상 품 명</td>
 				<td colspan="3"><input id="pt_NM" type="text"
-					style="width: 80%" name="pt_NM" /></td>
+					name="pt_NM" /></td>
 				<td>카테고리</td>
 				<td><select id="cate" class="form-control" name="category_fk"
-					style="width: 80%">
+					style="width: 100%">
 						<c:forEach var="c" items="${cate}" varStatus="i">
 							<option value="${c.cate_cd}">${c.cate_nm}</option>
 						</c:forEach>
@@ -285,7 +288,7 @@
 			</tr>
 			<tr>
 				<td>단 위</td>
-				<td><input id="unit" type="text" style="width: 80%" name="unit" />
+				<td><input id="unit" type="text" name="unit" />
 				</td>
 				<td>면/과세</td>
 				<td><select name="tax_cd" id="tax">
@@ -302,7 +305,7 @@
 			<tr>
 				<td>원 산 지</td>
 				<td><select id="origin" class="form-control" name="origin_nm"
-					style="width: 80%">
+					style="width: 100%">
 						<c:forEach var="c" items="${origin}" varStatus="i">
 							<option value="${c.origin_cd}">${c.origin_nm}</option>
 						</c:forEach>
@@ -311,7 +314,7 @@
 				<td><input id="exp_D" type="text" name="exp_D" /></td>
 				<td>M D</td>
 				<td><input type="text" id="emp"
-					style="background-color: #e0e0e0;" name="emp_NM" readonly /> <input
+					style="background-color: #ececec;" name="emp_NM" readonly /> <input
 					type="hidden" id="cd" name="pt_cd" /></td>
 			</tr>
 		</table>
@@ -320,11 +323,11 @@
 <!-- -------------------------------------      신규 창 ------------------------------------------------>
 <div class="edit_row add_edit">
 	<div class="contents_header">
-		<span class="material-icons"> add_box </span> <a> 상품추가</a>
+		<span class="material-icons"> add_circle_outline </span> <a>   상품추가</a>
 	</div>
 	<div class="button">
-		<button type="button" onclick="check2();">저장</button>
-		<button type="reset" onclick="javascript:add_edit_close()">닫기</button>
+		<button type="button" onclick="check2();"><span class="material-icons"> check_circle_outline </span>저장</button>
+		<button type="reset" onclick="javascript:add_edit_close()"><span class="material-icons"> highlight_off </span>닫기</button>
 	</div>
 	<form id="pt_add" action="add_product" method="post">
 		<table>
@@ -334,7 +337,7 @@
 					style="width: 80%" name="pt_NM" /></td>
 				<td>카테고리</td>
 				<td><select id="cate_a" class="form-control"
-					name="category_fk" style="width: 80%">
+					name="category_fk" style="width:100%;">
 						<c:forEach var="c" items="${cate}" varStatus="i">
 							<option value="${c.cate_cd}">${c.cate_nm}</option>
 						</c:forEach>
@@ -342,15 +345,15 @@
 			</tr>
 			<tr>
 				<td>단 위</td>
-				<td><input id="unit_a" type="text" style="width: 80%"
+				<td><input id="unit_a" type="text" 
 					name="unit" /></td>
 				<td>면/과세</td>
-				<td><select name="tax_cd" id="tax_a">
+				<td><select name="tax_cd" id="tax_a" style=" border:0px;">
 						<option value="0">면세</option>
 						<option value="1">과세</option>
 				</select></td>
 				<td>보관방법</td>
-				<td><select name="storage_cd" id="storage_a">
+				<td><select name="storage_cd" id="storage_a" style="border:0px;">
 						<option value="0">상온</option>
 						<option value="1">냉장</option>
 						<option value="2">냉동</option>
@@ -359,7 +362,7 @@
 			<tr>
 				<td>원 산 지</td>
 							<td><select id="origin_a" class="form-control"
-								name="origin_CD" style="width: 80%">
+								name="origin_CD" style="width: 100%; border:0px">
 									<c:forEach var="c" items="${origin}" varStatus="i">
 										<option value="${c.origin_cd}">${c.origin_nm}</option>
 									</c:forEach>

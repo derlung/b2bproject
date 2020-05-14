@@ -192,7 +192,7 @@ function center_search(){
 		<div class="form_header">
 			<form action="">
 				<div class="contents_header">
-					<span class="material-icons"> assignment </span> <a> 단가조회</a>
+					<span class="material-icons"> assignment </span> <a> 단가관리</a>
 				</div>
 				<div id="button">
 					<button type="button" onclick="javascript:clickTrEvent(this)">
@@ -207,9 +207,11 @@ function center_search(){
 				</div>
 				<div class="formbox">
 					<div>
-						<label for=""> <a id="point-star">*</a> <span>상품명/코드</span>
+						<label for=""> <a id="point-star">*</a> <span>센터</span>
 							<input />
-						</label> <label for="">대분류 </label><select>
+						</label> 
+						
+						<!-- <label for="">대분류 </label><select>
 							<option>가공식품</option>
 							<option>농산물</option>
 							<option>수산물</option>
@@ -221,17 +223,20 @@ function center_search(){
 							<option>당근</option>
 							<option>명태</option>
 							<option>일회용품</option>
-						</select>
-					</div>
-					<div>
-						<label for=""> <span>구매처명/코드</span> <input />
-						</label> <label for=""> <span>위치</span> <input />
+						</select> -->
+						
+				
+						<label for=""> <span>상품코드/명</span> <input />
+						</label> 
+						
+					<!-- 	<label for=""> <span>카테고리</span> <input />
 						</label>
 						<div style="display: inline-block">
 							<input type="radio" name="fruit" value="사과" /> 저장품 <input
 								type="radio" name="fruit" checked="checked" /> 협력사제품
-						</div>
-					</div>
+						</div> -->
+						
+				</div>
 				</div>
 			</form>
 		</div>
@@ -250,9 +255,9 @@ function center_search(){
 							<th style="padding: .4rem;">보관방법</th>
 							<th style="padding: .4rem;">면/과세</th>
 							<th style="padding: .4rem;">매입단가</th>
+							<th style="padding: .4rem;">구매처</th>
 							<th style="padding: .4rem;">구매처명</th>
 							<th style="padding: .4rem;">카테고리</th>
-							<th style="padding: .4rem;">카테고리명</th>
 							<th style="padding: .4rem;">MD</th>
 						</tr>
 						<c:forEach var="vo" items="${list}">

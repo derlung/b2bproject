@@ -43,8 +43,10 @@
 <!--ICON-->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet" />
-<link rel="stylesheet" href="/resources/dist/css/style2.css" />
+<link rel="stylesheet" href="/resources/dist/css/style2.css?2" />
 <title>홈</title>
+
+
 </head>
 <body>
 	<div id="wrap">
@@ -60,11 +62,11 @@
 			<div class="list-group flex-md-row header2 " id="myList" 	role="tablist">
 				<a href="" id="logo"><img src="/resources/img/logo.png"
 					width="100px" height="auto" /></a><a data-toggle="list"
-					href="#standartize" role="tab">기준정보</a> <a data-toggle="list"
-					href="#purchase" role="tab">구매</a> <a data-toggle="list"
-					href="#sales" role="tab">판매</a> <a data-toggle="list" href="#stock"
-					role="tab">재고</a> <a data-toggle="list" href="#accounting"
-					role="tab">결산</a>
+					href="#standartize" role="tab" style="border-radius: 5px;text-decoration:none; ">기준정보</a> <a data-toggle="list"
+					href="#purchase" role="tab" style="border-radius: 5px; text-decoration:none;">구매</a> <a data-toggle="list"
+					href="#sales" role="tab" style="border-radius: 5px;text-decoration:none; ">판매</a> <a data-toggle="list" href="#stock"
+					role="tab" style="border-radius: 5px;text-decoration:none; ">재고</a> <a data-toggle="list" href="#accounting"
+					role="tab" style="border-radius: 5px; text-decoration:none;">결산</a>
 			</div>
 			<div class=" smallMenu">
 				<div class=" tab-content" id="nav-tabContent">

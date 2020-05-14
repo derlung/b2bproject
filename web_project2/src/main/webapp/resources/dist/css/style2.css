@@ -37,6 +37,7 @@ body {
   font-family: "Nanum Gothic", sans-serif;
   font-size: 13px;
   align-content: center;
+  
 }
 
 header {
@@ -90,7 +91,7 @@ padding:10px 35px;
 .header2  a:not(:first-of-type):hover {
   color: #0083db;
   background-color: white;
- 
+
 }
 
 
@@ -112,16 +113,9 @@ padding:10px 35px;
   color: black;
 }
 
-/* .triangle {
-    width: 0px;
-    height: 0px;
-    border-bottom: 10px solid black;
-    border-right: 10px solid transparent;
-    border-left: 10px solid transparent;
-  } */
 
 .contents_header {
-	float:left;
+/* 	float:left; */
   display: inline-flex;
   /* height: auto; */
   font-size: 18px;
@@ -144,14 +138,16 @@ padding:10px 35px;
 
 /* 폼태그안에 글씨와 박스라벨*/
 label {
-  display: inline-block;
+  
   padding-right: 50px;
 }
 
 label span {
+
   display: inline;
   text-align: left;
   padding-right: 20px;
+}
 }
 
 input[type="text"] {
@@ -160,7 +156,7 @@ input[type="text"] {
   box-sizing: border-box;
   border: 1px solid #ababab;
   background-color: white;
-  text-align: center;
+  text-align: left;
 }
 
 .button {
@@ -172,6 +168,7 @@ input[type="text"] {
   float: right;
   margin: 10px;
   text-align: center;
+
 }
 button {
   border: 1px solid #ababab;
@@ -180,6 +177,8 @@ button {
   background-color: white;
   color: #007cb4;
   font-size: 16px;
+   font-family: "Nanum Gothic", sans-serif;
+  align-content: center;
 }
 
 button > span {
@@ -187,11 +186,11 @@ button > span {
 }
 
 .contentbox {
-padding:0 5px;
+padding:0 0px;
   margin: 10px;
   border: 1px solid #cacaca;
   background-color: white;
-/*   height: 700px; */
+  height: 600px; 
 }
 
 .table {
@@ -199,7 +198,7 @@ padding:0 5px;
 }
 
 table {
-  float: left;
+
   width: 80%;
   border: 1px solid #ababab;
   border-collapse: collapse;
@@ -218,6 +217,7 @@ th {
   background-color: #e6e7e9;
   height: 18px;
   padding: 5px;
+  text-align: center;
   font-weight: lighter;
 }
 
@@ -246,17 +246,66 @@ table a:hover {
         bottom: 0;
         left: 0;
         z-index:500;  /* Added */
-        padding:10px;
+        padding:10px 30px;
+
         border: 1px solid #cacaca;
         display:none;
         margin:0 30px;
         margin-bottom:20px;
        padding-bottom:20px;
        background:#E6E6FA;
+
+       font-family: "Nanum Gothic", sans-serif;
+       font-size:15px;
+
 	   
 }
 .edit_row table{
-	pading:5px 15px;
-	margin: 0 auto;
-	   background:white;
+
+  background:white;
+  width:100%;
+
+
+
+}
+
+.edit_row table input{
+  border:0px;
+  background-color : white;
+  padding-left:10px;
+  width:100%;
+  height:100%;
+}
+
+
+
+.edit_row table td{
+	height:40px;
+}
+
+.edit_row button{
+  height:35px;
+  color: #007cb4;
+  font-weight:bolder;
+
+}
+
+.edit_row select{
+  border:0px;
+  width:100%;
+  height :100%;
+}
+
+
+/* --------- 부트스트랩 충돌 CSS 수정 -----------------*/
+div#button{
+  color:black;
+   font-family: "Nanum Gothic", sans-serif;
+  color: #007cb4;
+}
+
+
+td input{
+	border:0px;
+	margin:0;
 }

@@ -43,4 +43,10 @@ public class PwServiceImpl implements PwService {
 		
 		return mapper.delete_row(key)>0?true:false;
 	}
+
+	@Override
+	public String login(PwVO vo) throws Exception {
+		
+		return mapper.login(vo);
+	}
 }

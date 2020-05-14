@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.MainViewMapper">
+
+<select id="chart1" resultType="com.spring.domain.MainVO">						
+select substr(order_pk, 5,2) as month, 						
+sum(supply_price) as chart1_supply						
+from order_detail_tb						
+group by substr(order_pk, 5,2) order by month						
+</select>						
+						
+						
+<select id="chart2" resultType="com.spring.domain.MainVO">						
+select depart_fk, sum(supply_price) as chart2_supply						
+from order_tb o, emp_tb e, customer_tb c						
+where o.customer_fk = c.customer_cd and						
+e.emp_cd = c.emp_fk						
+group by depart_fk						
+order by depart_fk						
+						
+</select>						
+						
+						
+						
+						
+<!-- 일 매출(팀별) -->						
+<select id="getDayTeam" resultType="int">						
+<!-- 1팀:901/~4팀:904 -->						
+select sum(supply_price) as sum_depart						
+from order_tb o, emp_tb e, customer_tb c						
+where o.customer_fk = c.customer_cd and						
+e.emp_cd = c.emp_fk and						
+to_char("date", 'yyyy-mm-dd')=(select to_char(sysdate, 'yyyy-mm-dd') from dual) and						
+e.depart_fk=901						
+group by depart_fk						
+order by depart_fk						
+</select>						
+						
+						
+						
+						
+<!-- 일 매출(전체) -->						
+<select id="getDaySum" resultType="int">						
+select sum(supply_price) as sum_day_supply  						
+from order_tb where "date"=(select to_date(sysdate, 'yy/mm/dd') from dual)						
+						
+</select>						
+						
+						
+<!-- 월 매출(팀별) -->						
+						
+<select id="getMonthTeam" resultType="int">						
+<!-- 1팀:0/~4팀:3 -->						
+select sum(supply_price) as sum_depart						
+from order_tb o, emp_tb e, customer_tb c						
+where o.customer_fk = c.customer_cd and						
+e.emp_cd = c.emp_fk and						
+to_char("date", 'yyyy-mm')=(select to_char(sysdate, 'yyyy-mm') from dual) and						
+e.depart_fk=901						
+group by depart_fk						
+order by depart_fk						
+						
+</select>						
+						
+<!-- 월 매출(전체) -->						
+<select id="getMonthSum" resultType="int">						
+select sum(supply_price) as month_supply from order_tb						
+where to_char("date", 'yyyy-mm')=(select to_char(sysdate, 'yyyy-mm') from dual)						
+group by to_char("date", 'yyyy-mm')						
+						
+						
+<!-- select TO_CHAR(sum(supply_price), 'FM999,999,999,999,999') as month_supply from order_tb						
+where to_char("date", 'yyyy-mm')=(select to_char(sysdate, 'yyyy-mm') from dual)						
+group by to_char("date", 'yyyy-mm') -->						
+</select>						
+						
+						
+						
+						
+</mapper>						

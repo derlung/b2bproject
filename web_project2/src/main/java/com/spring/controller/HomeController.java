@@ -72,7 +72,11 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
+<<<<<<< HEAD
+	public String main(Locale locale, Model model) {
+=======
 	public String main(PwVO vo,Model model) {
+>>>>>>> refs/remotes/origin/master
 		log.info("메인 페이지");
 		passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();	
 		try {

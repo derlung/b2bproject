@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.PwMapper">
+
+	<insert id="add_pw">
+		insert into password_email_auth(id,email,key,time,group_GB) values(
+		(select
+		<if test="group_GB=='e'.toString()">
+			emp_cd from emp_tb
+		</if>
+		<if test="group_GB=='cr'.toString()">
+			creditor_cd from creditor_tb
+		</if>
+		<if test="group_GB=='cu'.toString()">
+			customer_cd from customer_tb
+		</if>
+		where email=#{email}),
+		#{email},
+		#{key},
+		(SELECT SYSDATE FROM DUAL),
+		#{group_GB})
+	</insert>
+
+
+	<!-- 24시간 확인 -->
+	<select id="get_time" resultType="String">
+		select time from password_email_auth where key=#{key}
+	</select>
+
+	<!-- 사용자가 입력한 아이디와 변경할 아이디가 일치하는지 확인 --> 
+	<select id="check_id" resultType="String">
+		select id from password_email_auth where key=#{key}
+	</select>
+
+	<!-- 비밀번호 변경 --> 
+	<update id="reset_pw">
+		update
+		<if test="group_GB=='e'.toString()">
+			emp_tb
+		</if>
+		<if test="group_GB=='cr'.toString()">
+			creditor_tb
+		</if>
+		<if test="group_GB=='cu'.toString()">
+			customer_tb
+		</if>
+		set password = #{pw} where
+			<if test="group_GB=='e'.toString()">
+			emp_cd = #{id}
+		</if>
+		<if test="group_GB=='cr'.toString()">
+			creditor_cd = #{id}
+		</if>
+		<if test="group_GB=='cu'.toString()">
+			customer_cd=#{id}
+		</if>
+	</update>
+	<delete id="delete_row">
+		delete from password_email_auth where key=#{key}
+	</delete>
+	
+		
+	<select  id="login" resultType="String">
+		select password 
+		<if test="group_GB=='e'.toString()">
+			 from emp_tb where emp_cd =
+		</if>
+		<if test="group_GB=='cr'.toString()">
+			 from creditor_tb where creditor_cd =
+		</if>
+		<if test="group_GB=='cu'.toString()">
+			from customer_tb where customer_cd =
+		</if>
+		#{id} 
+	</select>
+</mapper>

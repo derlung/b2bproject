@@ -22,26 +22,30 @@
 
 	function check() {
 		var result = confirm("변경사항을 저장하겠습니까?");
+		console.log(result);
 		if (result) {
-			pt_update();
+			let form = $("#pt_update");
+			form.submit();			
+			$(".update_edit").hide();
+			alert("성공적으로 변경되었습니다.");
 		} else {
+			alert("변경이 실패하였습니다.");
 			return;
-		}
-		//	return result;
+		}		
 	}
 
 	function check2() {
 		var result = confirm("상품 입력을 저장하겠습니까?");
 		console.log(result);
-		if (result) {
-			
-			let form = $("#pt_add");			
-			form.submit();
+		if (result) {			
+			let form_add = $("#pt_add");			
+			form_add.submit();
 			$(".add_edit").hide();
+			alert("성공적으로 입력되었습니다.");
 		} else {
+			alert("입력이 실패하였습니다.");
 			return;
-		}
-		//	return result;
+		}		
 	}
 
 	function clickTrEvent(trObj) {
@@ -102,18 +106,24 @@
 		$(".add_edit").show();
 		$(".update_edit").hide();
 	}
+	function update_edit(){
+		$(".update_edit").show();
+		$(".add_edit").hide();
+	}
 
 	function pt_update() {
+		console.log($('#pt_update').serialize());
 		$.ajax({
 			url : "update_product",
 			method : "POST",
 			data : $('#pt_update').serialize(),
 			success : function(data) {
-				if (data === true) {
+				console.log("서버 " + data);
+				/* if (data === true) {
 					alert("성공적으로 변경되었습니다.");
 				} else {
 					alert("변경이 실패하였습니다.");
-				}
+				} */
 			},
 			error : function(data) {
 				alert("오류");
@@ -147,28 +157,24 @@
 			let category=searchForm.find("input[name='category']").val();
 			
 			
-			//가져온 값이 숫자가 아닌 경우 타입 변환
+			//가져온 값이 숫자가 아닌 경우 타입 변환			
 			if(isNaN(keyword)){
-				searchForm.find("input[name='type']").val("S");
-			}else if(keyword==''){
+				searchForm.find("input[name='type']").val("N");
+			}else if(keyword==''){				
 				
 			}else{				
-				searchForm.find("input[name='type']").val("N");
-			}
-			
+				searchForm.find("input[name='type']").val("S");
+			}						
 			var type = searchForm.find("input[name='type']").val();
-			
-			if(category!==''){
-				type +="C";				
+			 if(category!==''){				
+				type +="C";			
 				searchForm.find("input[name='type']").val(type);
 				console.log(type);
 			}
-			//검색 후 모달 창 닫기
-			
-			
+			//검색 후 모달 창 닫기		
 			
 			searchForm.submit();
-	//	})
+		})
 	
 	}
 </script>
@@ -265,7 +271,7 @@
 		<a> 상품관리</a>
 	</div>
 	<div class="button">
-		<button type="button" onclick="return check();">수정</button>
+		<button type="button" onclick="check();">수정</button>
 		<button type="reset" onclick="javascript:update_edit_close();">닫기</button>
 	</div>
 	<form id="pt_update" action="update_product" method="post">
@@ -301,7 +307,7 @@
 			</tr>
 			<tr>
 				<td>원 산 지</td>
-				<td><select id="origin" class="form-control" name="origin_nm"
+				<td><select id="origin" class="form-control" name="origin_CD"
 					style="width: 80%">
 						<c:forEach var="c" items="${origin}" varStatus="i">
 							<option value="${c.origin_cd}">${c.origin_nm}</option>

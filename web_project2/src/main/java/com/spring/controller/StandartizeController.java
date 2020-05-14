@@ -119,49 +119,33 @@ public class StandartizeController {
 	
 	@PostMapping(value="add_product")
 	public String add_product(ProductVO vo,RedirectAttributes rttr) {		
-		log.info("상품 삽입"+vo);	
-//		Boolean result=null;
-//		ProductVO vo_null = new ProductVO();
-////		Criteria cri_null = new Criteria();
-//		vo.setCategory_fk(0);
-//		vo.setPt_cd(0);
-//		vo.setPt_NM("");
-//		try {
-//			result=service.insert_pt(vo);
-//			log.info("삽입결과 : "+result);
-//			model.addAttribute("list",service.getList(cri,vo_null));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		
-		
+		log.info("상품 삽입"+vo);
 		boolean result;
 		try {
-			result = service.insert_pt(vo);
-			//model.addAttribute("list",service.getList_category(cri));
+			result = service.insert_pt(vo);			
 		} catch (Exception e) {			
 			e.printStackTrace();
-		}	
-		
-		
-		
-		//cri.setCategory(String.valueOf(vo.getCategory_fk()));
+		}			
 		rttr.addAttribute("category", vo.getCategory_fk());
 		rttr.addAttribute("type", "C");
+		
 		return "redirect:product_view";
 	}
 	
 	@PostMapping(value="update_product")
-	@ResponseBody
-	public boolean  update_product(ProductVO vo,RedirectAttributes rttr) {
-		System.out.println(vo);
-		log.info("상품 변경");
-		boolean result=false;
+//	@ResponseBody
+	public String update_product(ProductVO vo,RedirectAttributes rttr) {		
+		log.info("상품 변경"+vo);
+		boolean result;
+		//boolean result=false;
 		try {		
 			result =service.update_pt(vo); 
 		} catch (Exception e) {
 			e.printStackTrace();			
-		}
-		return result;
+		}		
+		rttr.addAttribute("category", vo.getCategory_fk());
+		rttr.addAttribute("type", "C");
+		
+		return "redirect:product_view";
 	}
 }
